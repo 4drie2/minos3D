@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   testmap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/28 16:17:40 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/30 12:40:58 by abidaux          ###   ########.fr       */
+/*   Created: 2025/10/30 12:30:22 by abidaux           #+#    #+#             */
+/*   Updated: 2025/10/30 12:42:57 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int main(int ac, char **av)
+bool valide_map(char **map)
 {
-	if (!valide_map(av[1]))
-		return 0;
-	return 0;
+	// return true si la map est valide
+	// return false si la map est invalide
 }
