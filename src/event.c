@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 20:44:07 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 14:22:25 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 14:25:04 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@
 */
 int	key_press(int keycode, t_data *data)
 {
-	if (keycode == 65307) // ESC
+	if (keycode == 65307)
 		close_window(data);
-	else if (keycode == 119) // W
+	else if (keycode == 119)
 		move_forward(data);
-	else if (keycode == 115) // S
+	else if (keycode == 115)
 		move_backward(data);
-	else if (keycode == 65361) // Left arrow
+	else if (keycode == 65361)
 		rotate_left(data);
-	else if (keycode == 65363) // Right arrow
+	else if (keycode == 65363)
 		rotate_right(data);
 
 	return (0);
