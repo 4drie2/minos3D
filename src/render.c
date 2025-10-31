@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:53:02 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 14:39:17 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 14:53:14 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 */
 int	render_frame(t_data *data)
 {
+	// Mettre à jour les mouvements en fonction des touches pressées
+	update_movement(data);
+
 	// Détruire l'ancienne image et en créer une nouvelle
 	if (data->img.img)
 		mlx_destroy_image(data->mlx, data->img.img);

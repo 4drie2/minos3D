@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 14:39:24 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 14:53:18 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@ typedef struct s_player
 	double	plane_y;
 }	t_player;
 
+typedef struct s_keys
+{
+	int	w;
+	int	s;
+	int	a;
+	int	d;
+	int	left;
+	int	right;
+}	t_keys;
+
 typedef struct s_data
 {
 	void		*mlx;
@@ -56,6 +66,7 @@ typedef struct s_data
 	int			**map;
 	int			map_width;
 	int			map_height;
+	t_keys		keys;
 }	t_data;
 
 typedef struct s_ray
@@ -84,7 +95,9 @@ void	cleanup(t_data *data);
 int		close_window(t_data *data);
 
 // Events
+int		key_release(int keycode, t_data *data);
 int		key_press(int keycode, t_data *data);
+void	update_movement(t_data *data);
 
 // Render
 int		render_frame(t_data *data);

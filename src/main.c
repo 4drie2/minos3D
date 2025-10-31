@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 16:17:40 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 14:26:17 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 14:50:03 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,12 +131,14 @@ int	main(void)
 {
 	t_data	data;
 
+	ft_memset(&data.keys, 0, sizeof(t_keys));
 	if (!init_data(&data))
 		ft_error("Initialization failed");
 	if (!parse_file(&data, NULL))
 		ft_error("parsing failed");
 	mlx_hook(data.win, 17, 0, close_window, &data);
-	mlx_hook(data.win, 2, 1L << 0, key_press, &data);
+	mlx_hook(data.win, KeyPress, KeyPressMask, key_press, &data);
+	mlx_hook(data.win, KeyRelease, KeyReleaseMask, key_release, &data);
 	mlx_loop_hook(data.mlx, render_frame, &data);
 	mlx_loop(data.mlx);
 	return (0);
