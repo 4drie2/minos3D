@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 14:53:18 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 16:08:45 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ typedef struct s_image
 	int		line_length;
 	int		endian;
 }	t_image;
+
+typedef struct s_texture
+{
+	void	*img;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_texture;
 
 typedef struct s_player
 {
@@ -67,6 +78,7 @@ typedef struct s_data
 	int			map_width;
 	int			map_height;
 	t_keys		keys;
+	t_texture	textures[4];
 }	t_data;
 
 typedef struct s_ray
@@ -86,6 +98,9 @@ typedef struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+	double	wall_x;
+	int		tex_num;
+	int		tex_x;
 }	t_ray;
 
 // Main
@@ -115,3 +130,9 @@ void	move_right(t_data *data);
 
 // Parsing (temporaire)
 int		parse_file(t_data *data, char *filename);
+
+// Textures
+int		init_textures(t_data *data);
+int		load_texture(t_data *data, t_texture *texture, char *path);
+void	free_textures(t_data *data);
+int		get_texture_color(t_texture *texture, int x, int y);

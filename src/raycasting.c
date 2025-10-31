@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:15 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 14:06:10 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 16:08:44 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,26 +146,59 @@ void	calculate_line_height(t_ray *ray)
 }
 
 /*
-** draw_vertical_line : dessine une colonne de l'écran
+** calculate_texture_x : calcule la coordonnée x de la texture
+**
+** wall_x : position exacte où le rayon touche le mur (0.0 à 1.0)
+** tex_x : coordonnée x dans la texture
+** tex_num : quelle texture utiliser (0=NO, 1=SO, 2=EA, 3=WE)
+*/
+void	calculate_texture_x(t_data *data, t_ray *ray)
+{
+	// Calcul de wall_x (où exactement le rayon touche le mur)
+	if (ray->side == 0)
+		ray->wall_x = data->player.pos_y + ray->perp_wall_dist * ray->dir_y;
+	else
+		ray->wall_x = data->player.pos_x + ray->perp_wall_dist * ray->dir_x;
+	ray->wall_x -= floor(ray->wall_x);
+
+	// Quelle texture utiliser selon l'orientation du mur
+	if (ray->side == 0)
+	{
+		if (ray->dir_x > 0)
+			ray->tex_num = 2; // Est
+		else
+			ray->tex_num = 3; // Ouest
+	}
+	else
+	{
+		if (ray->dir_y > 0)
+			ray->tex_num = 1; // Sud
+		else
+			ray->tex_num = 0; // Nord
+	}
+
+	// Calcul de tex_x
+	ray->tex_x = (int)(ray->wall_x * (double)data->textures[ray->tex_num].width);
+
+	// Inverser tex_x si nécessaire pour éviter l'effet miroir
+	if ((ray->side == 0 && ray->dir_x > 0) || (ray->side == 1 && ray->dir_y < 0))
+		ray->tex_x = data->textures[ray->tex_num].width - ray->tex_x - 1;
+}
+
+/*
+** draw_vertical_line : dessine une colonne de l'écran avec textures
 **
 ** Ciel (0 à draw_start) → bleu clair
-** Mur (draw_start à draw_end) → couleur selon orientation
+** Mur (draw_start à draw_end) → texture
 ** Sol (draw_end à WIN_HEIGHT) → gris foncé
 */
 void	draw_vertical_line(t_data *data, t_ray *ray, int x)
 {
-	int	y;
-	int	color;
-
-	// Couleur du mur selon l'orientation
-	if (ray->side == 1)
-		color = 0xFF0000; // Rouge (Est/Ouest)
-	else
-		color = 0x00FF00; // Vert (Nord/Sud)
-
-	// Assombrir les murs horizontaux pour effet de profondeur
-	if (ray->side == 1)
-		color = color / 2;
+	int		y;
+	int		color;
+	int		tex_y;
+	double	step;
+	double	tex_pos;
 
 	// Dessine le ciel
 	y = 0;
@@ -175,9 +208,21 @@ void	draw_vertical_line(t_data *data, t_ray *ray, int x)
 		y++;
 	}
 
-	// Dessine le mur
+	// Calcul pour mapper la texture sur la hauteur du mur
+	step = 1.0 * data->textures[ray->tex_num].height / ray->line_height;
+	tex_pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2) * step;
+
+	// Dessine le mur avec texture
+	y = ray->draw_start;
 	while (y <= ray->draw_end)
 	{
+		tex_y = (int)tex_pos & (data->textures[ray->tex_num].height - 1);
+		tex_pos += step;
+		color = get_texture_color(&data->textures[ray->tex_num],
+				ray->tex_x, tex_y);
+		// Assombrir les murs horizontaux pour effet de profondeur
+		if (ray->side == 1)
+			color = (color >> 1) & 0x7F7F7F;
 		my_mlx_pixel_put(&data->img, x, y, color);
 		y++;
 	}
@@ -207,6 +252,7 @@ void	cast_rays(t_data *data)
 		perform_dda(data, &ray);
 		calculate_wall_distance(data, &ray);
 		calculate_line_height(&ray);
+		calculate_texture_x(data, &ray);
 		draw_vertical_line(data, &ray, x);
 		x++;
 	}
