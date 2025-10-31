@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:11:17 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 14:12:05 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 14:39:13 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@ void	move_forward(t_data *data)
 	new_x = data->player.pos_x + data->player.dir_x * MOVE_SPEED;
 	new_y = data->player.pos_y + data->player.dir_y * MOVE_SPEED;
 
-	// Vérifie collision
-	if (data->map[(int)new_y][(int)new_x] == 0)
-	{
+	if (data->map[(int)data->player.pos_y][(int)new_x] == 0)
 		data->player.pos_x = new_x;
+	if (data->map[(int)new_y][(int)data->player.pos_x] == 0)
 		data->player.pos_y = new_y;
-	}
 }
 
 /*
@@ -95,4 +93,39 @@ void	rotate_right(t_data *data)
 							data->player.plane_y * sin(-ROT_SPEED);
 	data->player.plane_y = old_plane_x * sin(-ROT_SPEED) +
 							data->player.plane_y * cos(-ROT_SPEED);
+}
+
+/*
+** move_left : déplace le joueur vers la gauche (strafe)
+** Utilise le vecteur perpendiculaire à la direction (plane)
+*/
+void	move_left(t_data *data)
+{
+    double	new_x;
+    double	new_y;
+
+    new_x = data->player.pos_x - data->player.plane_x * MOVE_SPEED;
+    new_y = data->player.pos_y - data->player.plane_y * MOVE_SPEED;
+
+    if (data->map[(int)data->player.pos_y][(int)new_x] == 0)
+        data->player.pos_x = new_x;
+    if (data->map[(int)new_y][(int)data->player.pos_x] == 0)
+        data->player.pos_y = new_y;
+}
+
+/*
+** move_right : déplace le joueur vers la droite (strafe)
+*/
+void	move_right(t_data *data)
+{
+    double	new_x;
+    double	new_y;
+
+    new_x = data->player.pos_x + data->player.plane_x * MOVE_SPEED;
+    new_y = data->player.pos_y + data->player.plane_y * MOVE_SPEED;
+
+    if (data->map[(int)data->player.pos_y][(int)new_x] == 0)
+        data->player.pos_x = new_x;
+    if (data->map[(int)new_y][(int)data->player.pos_x] == 0)
+        data->player.pos_y = new_y;
 }

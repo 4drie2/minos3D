@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 14:14:51 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 14:39:24 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
+#include <X11/keysym.h>
+#include <X11/X.h>
 #include "../minilibx-linux/mlx.h"
 #include "../minilibx-linux/mlx_int.h"
 #include "../libft/libft.h"
@@ -95,6 +97,8 @@ void	move_forward(t_data *data);
 void	move_backward(t_data *data);
 void	rotate_left(t_data *data);
 void	rotate_right(t_data *data);
+void	move_left(t_data *data);
+void	move_right(t_data *data);
 
 // Parsing (temporaire)
 int		parse_file(t_data *data, char *filename);
