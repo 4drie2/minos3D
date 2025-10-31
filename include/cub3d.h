@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 17:14:29 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 17:25:04 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
-# define MOVE_SPEED 0.05
-# define ROT_SPEED 0.03
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.05
 
 typedef struct s_image
 {
