@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 16:17:40 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 14:20:21 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 14:26:17 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,33 @@ void	ft_error(char *msg)
 /*
 ** cleanup : libère toutes les ressources MLX
 */
+/*
+** cleanup : libère toutes les ressources MLX
+*/
 void	cleanup(t_data *data)
 {
+	int i;
+
 	if (data->img.img)
 		mlx_destroy_image(data->mlx, data->img.img);
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
+	if (data->mlx)
+	{
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
+	}
+	// Libérer la map
+	if (data->map)
+	{
+		i = 0;
+		while (i < data->map_height)
+		{
+			free(data->map[i]);
+			i++;
+		}
+		free(data->map);
+	}
 }
 
 /*
