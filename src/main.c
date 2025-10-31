@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 16:17:40 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 16:04:02 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 16:35:53 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
 ** init_player : initialise la position et direction du joueur
 ** pos : position (x, y) dans la carte
 ** dir : vecteur direction (où regarde le joueur)
-** plane : plan de la caméra (perpendiculaire à dir, définit le FOV)
+** plane : plan de la caméra (perpendiculaire à dir, définit le FOV) A PARSERRRRRRRRRRRRRRRRRRRRRRRRRR et fov dans .h
 */
 void	init_player(t_player *player)
 {
@@ -70,7 +70,7 @@ int	init_data(t_data *data)
 }
 
 /*
-** ft_error : affiche un message d'erreur et quitte
+** ft_error : affiche un message d'erreur et quitte APPELER CLEANUP ???????????????????????????????
 */
 void	ft_error(char *msg)
 {

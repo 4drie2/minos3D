@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:11:17 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 15:59:31 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 17:22:14 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ void	move_backward(t_data *data)
 	new_x = data->player.pos_x - data->player.dir_x * MOVE_SPEED;
 	new_y = data->player.pos_y - data->player.dir_y * MOVE_SPEED;
 
-	if (data->map[(int)new_y][(int)new_x] == 0)
-	{
+	if (data->map[(int)data->player.pos_y][(int)new_x] == 0)
 		data->player.pos_x = new_x;
+	if (data->map[(int)new_y][(int)data->player.pos_x] == 0)
 		data->player.pos_y = new_y;
-	}
 }
 
 /*
