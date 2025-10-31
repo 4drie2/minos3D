@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:00:00 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 17:53:00 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 18:14:45 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	move_backward(t_data *data)
 	move_player(data, move_x, move_y);
 }
 
-void	move_left(t_data *data)
+void	move_right(t_data *data)
 {
 	double	move_speed;
 	double	move_x;
@@ -48,7 +48,7 @@ void	move_left(t_data *data)
 	move_player(data, move_x, move_y);
 }
 
-void	move_right(t_data *data)
+void	move_left(t_data *data)
 {
 	double	move_speed;
 	double	move_x;

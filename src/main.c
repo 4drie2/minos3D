@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 16:17:40 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 17:56:34 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 18:55:04 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char *argv[])
 	ft_memset(&data.keys, 0, sizeof(t_keys));
 	if (!init_data(&data))
 		ft_error("Initialization failed");
-	if (!parse_file(&data, NULL))
+	if (!parse_file(&data, argv[1]))
 		ft_error("parsing failed");
 	if (!init_textures(&data))
 		ft_error("Failed to load textures");
