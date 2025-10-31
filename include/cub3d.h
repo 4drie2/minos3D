@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 17:25:04 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 17:52:49 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,19 @@ void	ft_error(char *msg);
 void	cleanup(t_data *data);
 int		close_window(t_data *data);
 
+/* init.c */
+void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
+void	init_player(t_player *player);
+int		init_data(t_data *data);
+void	ft_error(char *msg);
+
 // Events
 int		key_release(int keycode, t_data *data);
 int		key_press(int keycode, t_data *data);
 void	update_movement(t_data *data);
+
+/* cleanup.c */
+void	cleanup(t_data *data);
 
 // Render
 int		render_frame(t_data *data);
@@ -120,16 +129,37 @@ int		render_frame(t_data *data);
 // Raycasting
 void	cast_rays(t_data *data);
 
-// player
+/* raycasting_utils.c */
+void	calculate_wall_distance(t_data *data, t_ray *ray);
+void	calculate_line_height(t_ray *ray);
+void	calculate_texture_x(t_data *data, t_ray *ray);
+
+/* raycasting_draw.c */
+void	draw_vertical_line(t_data *data, t_ray *ray, int x);
+
+/* Parsing */
+int		parse_file(t_data *data, char *filename);
+int		allocate_map(t_data *data);
+void	fill_map_part1(t_data *data);
+void	fill_map_part2(t_data *data);
+void	fill_map_part3(t_data *data);
+void	fill_map_part4(t_data *data);
+void	init_map_row(int *row, int values[30]);
+
+/* Player */
+void	rotate_player(t_player *player, double angle);
+void	move_player(t_data *data, double move_x, double move_y);
+void	handle_rotation(t_data *data);
+void	handle_movement(t_data *data);
+void	handle_strafe_movement(t_data *data, double move_speed);
+
+/* player_move.c */
 void	move_forward(t_data *data);
 void	move_backward(t_data *data);
-void	rotate_left(t_data *data);
-void	rotate_right(t_data *data);
 void	move_left(t_data *data);
 void	move_right(t_data *data);
-
-// Parsing (temporaire)
-int		parse_file(t_data *data, char *filename);
+void	rotate_left(t_data *data);
+void	rotate_right(t_data *data);
 
 // Textures
 int		init_textures(t_data *data);

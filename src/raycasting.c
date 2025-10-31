@@ -6,12 +6,11 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:15 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 16:08:44 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 17:41:08 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../include/cub3d.h"
-
+#include "../include/cub3d.h"
 
 /*
 ** perform_dda : algorithme DDA (Digital Differential Analysis)
@@ -30,21 +29,18 @@ void	perform_dda(t_data *data, t_ray *ray)
 	hit = 0;
 	while (hit == 0)
 	{
-		// Avance dans la direction la plus proche
 		if (ray->side_dist_x < ray->side_dist_y)
 		{
 			ray->side_dist_x += ray->delta_dist_x;
 			ray->map_x += ray->step_x;
-			ray->side = 0; // Mur vertical (Nord/Sud)
+			ray->side = 0;
 		}
 		else
 		{
 			ray->side_dist_y += ray->delta_dist_y;
 			ray->map_y += ray->step_y;
-			ray->side = 1; // Mur horizontal (Est/Ouest)
+			ray->side = 1;
 		}
-
-		// Vérifie si on touche un mur
 		if (data->map[ray->map_y][ray->map_x] > 0)
 			hit = 1;
 	}
@@ -61,18 +57,11 @@ void	init_ray(t_data *data, t_ray *ray, int x)
 {
 	double	camera_x;
 
-	// Position sur le plan caméra : -1 (gauche) à +1 (droite)
 	camera_x = 2 * x / (double)WIN_WIDTH - 1;
-
-	// Direction du rayon = direction joueur + plan caméra
 	ray->dir_x = data->player.dir_x + data->player.plane_x * camera_x;
 	ray->dir_y = data->player.dir_y + data->player.plane_y * camera_x;
-
-	// Case de la map où se trouve le joueur
 	ray->map_x = (int)data->player.pos_x;
 	ray->map_y = (int)data->player.pos_y;
-
-	// Distance pour traverser une case entière
 	ray->delta_dist_x = fabs(1 / ray->dir_x);
 	ray->delta_dist_y = fabs(1 / ray->dir_y);
 }
@@ -88,153 +77,35 @@ void	init_step(t_data *data, t_ray *ray)
 	if (ray->dir_x < 0)
 	{
 		ray->step_x = -1;
-		ray->side_dist_x = (data->player.pos_x - ray->map_x) * ray->delta_dist_x;
+		ray->side_dist_x = (data->player.pos_x - ray->map_x)
+			* ray->delta_dist_x;
 	}
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - data->player.pos_x) * ray->delta_dist_x;
+		ray->side_dist_x = (ray->map_x + 1.0 - data->player.pos_x)
+			* ray->delta_dist_x;
 	}
-
 	if (ray->dir_y < 0)
 	{
 		ray->step_y = -1;
-		ray->side_dist_y = (data->player.pos_y - ray->map_y) * ray->delta_dist_y;
+		ray->side_dist_y = (data->player.pos_y - ray->map_y)
+			* ray->delta_dist_y;
 	}
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - data->player.pos_y) * ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1.0 - data->player.pos_y)
+			* ray->delta_dist_y;
 	}
 }
 
 /*
 ** calculate_wall_distance : calcule la distance perpendiculaire au mur
 **
-** ⚠️ On utilise la distance PERPENDICULAIRE (pas euclidienne)
+** On utilise la distance PERPENDICULAIRE (pas euclidienne)
 ** Sinon effet "fisheye" (distorsion)
 */
-void	calculate_wall_distance(t_data *data, t_ray *ray)
-{
-	if (ray->side == 0)
-		ray->perp_wall_dist = (ray->map_x - data->player.pos_x +
-								(1 - ray->step_x) / 2) / ray->dir_x;
-	else
-		ray->perp_wall_dist = (ray->map_y - data->player.pos_y +
-								(1 - ray->step_y) / 2) / ray->dir_y;
-}
-
-/*
-** calculate_line_height : calcule la hauteur du mur à l'écran
-**
-** Plus le mur est proche, plus il est grand
-** line_height = hauteur_écran / distance
-*/
-void	calculate_line_height(t_ray *ray)
-{
-	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
-
-	// Point de départ (haut du mur)
-	ray->draw_start = -ray->line_height / 2 + WIN_HEIGHT / 2;
-	if (ray->draw_start < 0)
-		ray->draw_start = 0;
-
-	// Point de fin (bas du mur)
-	ray->draw_end = ray->line_height / 2 + WIN_HEIGHT / 2;
-	if (ray->draw_end >= WIN_HEIGHT)
-		ray->draw_end = WIN_HEIGHT - 1;
-}
-
-/*
-** calculate_texture_x : calcule la coordonnée x de la texture
-**
-** wall_x : position exacte où le rayon touche le mur (0.0 à 1.0)
-** tex_x : coordonnée x dans la texture
-** tex_num : quelle texture utiliser (0=NO, 1=SO, 2=EA, 3=WE)
-*/
-void	calculate_texture_x(t_data *data, t_ray *ray)
-{
-	// Calcul de wall_x (où exactement le rayon touche le mur)
-	if (ray->side == 0)
-		ray->wall_x = data->player.pos_y + ray->perp_wall_dist * ray->dir_y;
-	else
-		ray->wall_x = data->player.pos_x + ray->perp_wall_dist * ray->dir_x;
-	ray->wall_x -= floor(ray->wall_x);
-
-	// Quelle texture utiliser selon l'orientation du mur
-	if (ray->side == 0)
-	{
-		if (ray->dir_x > 0)
-			ray->tex_num = 2; // Est
-		else
-			ray->tex_num = 3; // Ouest
-	}
-	else
-	{
-		if (ray->dir_y > 0)
-			ray->tex_num = 1; // Sud
-		else
-			ray->tex_num = 0; // Nord
-	}
-
-	// Calcul de tex_x
-	ray->tex_x = (int)(ray->wall_x * (double)data->textures[ray->tex_num].width);
-
-	// Inverser tex_x si nécessaire pour éviter l'effet miroir
-	if ((ray->side == 0 && ray->dir_x > 0) || (ray->side == 1 && ray->dir_y < 0))
-		ray->tex_x = data->textures[ray->tex_num].width - ray->tex_x - 1;
-}
-
-/*
-** draw_vertical_line : dessine une colonne de l'écran avec textures
-**
-** Ciel (0 à draw_start) → bleu clair
-** Mur (draw_start à draw_end) → texture
-** Sol (draw_end à WIN_HEIGHT) → gris foncé
-*/
-void	draw_vertical_line(t_data *data, t_ray *ray, int x)
-{
-	int		y;
-	int		color;
-	int		tex_y;
-	double	step;
-	double	tex_pos;
-
-	// Dessine le ciel
-	y = 0;
-	while (y < ray->draw_start)
-	{
-		my_mlx_pixel_put(&data->img, x, y, 0x87CEEB);
-		y++;
-	}
-
-	// Calcul pour mapper la texture sur la hauteur du mur
-	step = 1.0 * data->textures[ray->tex_num].height / ray->line_height;
-	tex_pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2) * step;
-
-	// Dessine le mur avec texture
-	y = ray->draw_start;
-	while (y <= ray->draw_end)
-	{
-		tex_y = (int)tex_pos & (data->textures[ray->tex_num].height - 1);
-		tex_pos += step;
-		color = get_texture_color(&data->textures[ray->tex_num],
-				ray->tex_x, tex_y);
-		// Assombrir les murs horizontaux pour effet de profondeur
-		if (ray->side == 1)
-			color = (color >> 1) & 0x7F7F7F;
-		my_mlx_pixel_put(&data->img, x, y, color);
-		y++;
-	}
-
-	// Dessine le sol
-	while (y < WIN_HEIGHT)
-	{
-		my_mlx_pixel_put(&data->img, x, y, 0x404040);
-		y++;
-	}
-}
-
 /*
 ** cast_rays : fonction principale du raycasting
 ** Lance un rayon pour chaque colonne de l'écran
