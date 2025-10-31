@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/30 20:48:05 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 14:14:51 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,45 @@ typedef struct s_data
 	int			map_height;
 }	t_data;
 
-/* Init */
-int		init_data(t_data *data);
-void	init_player(t_player *player);
+typedef struct s_ray
+{
+	double	dir_x;
+	double	dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	double	perp_wall_dist;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+}	t_ray;
 
-/* Render */
-int		render_frame(t_data *data);
+// Main
 void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
-
-/* Events */
-int		key_press(int keycode, t_data *data);
-int		close_window(t_data *data);
-
-/* Utils */
 void	ft_error(char *msg);
 void	cleanup(t_data *data);
+int		close_window(t_data *data);
+
+// Events
+int		key_press(int keycode, t_data *data);
+
+// Render
+int		render_frame(t_data *data);
+
+// Raycasting
+void	cast_rays(t_data *data);
+
+// player
+void	move_forward(t_data *data);
+void	move_backward(t_data *data);
+void	rotate_left(t_data *data);
+void	rotate_right(t_data *data);
+
+// Parsing (temporaire)
+int		parse_file(t_data *data, char *filename);

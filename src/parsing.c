@@ -5,23 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/30 12:30:25 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/30 20:45:38 by abidaux          ###   ########.fr       */
+/*   Created: 2025/10/31 14:00:49 by abidaux           #+#    #+#             */
+/*   Updated: 2025/10/31 14:02:15 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-// char	**mapParssed(void)
-// {
-// 	static char	parsedMap[5][5] =
-// 	{
-// 	{1, 1, 1,  1, 1},
-// 	{1, 0, 0,  0, 1},
-// 	{1, 0, 'N',0, 1},
-// 	{1, 0, 0,  0, 1},
-// 	{1, 1, 1,  1, 1},
-// 	};
+/*
+** parse_file : fonction temporaire qui simule le parsing
+** Plus tard, ton pote remplira data->map depuis le fichier .cub
+** Pour l'instant, on crée une map en dur pour tester
+*/
+int	parse_file(t_data *data, char *filename)
+{
+	int i;
 
-// 	return (parsedMap);
-// }
+	(void)filename; // Pour l'instant on ignore le fichier
+
+	// Allocation de la map - a calculer...
+	data->map_height = 8;
+	data->map_width = 8;
+	data->map = malloc(sizeof(int *) * data->map_height);
+	if (!data->map)
+		return (0);
+
+	// Map test : 1 = mur, 0 = vide
+	i = 0;
+	while (i < data->map_height)
+	{
+		data->map[i] = malloc(sizeof(int) * data->map_width);
+		if (!data->map[i])
+			return (0);
+		i++;
+	}
+
+	// Remplissage manuel (map fermée avec un espace au centre)
+	int temp_map[8][8] = {
+		{1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 1, 1, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1}
+	};
+
+	i = 0;
+	while (i < 8)
+	{
+		int j = 0;
+		while (j < 8)
+		{
+			data->map[i][j] = temp_map[i][j];
+			j++;
+		}
+		i++;
+	}
+
+	return (1);
+}

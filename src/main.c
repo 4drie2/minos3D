@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 16:17:40 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/30 20:48:56 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/10/31 14:20:21 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ int	main(void)
 
 	if (!init_data(&data))
 		ft_error("Initialization failed");
+	if (!parse_file(&data, NULL))
+		ft_error("parsing failed");
 	mlx_hook(data.win, 17, 0, close_window, &data);
 	mlx_hook(data.win, 2, 1L << 0, key_press, &data);
 	mlx_loop_hook(data.mlx, render_frame, &data);
