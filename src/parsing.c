@@ -32,8 +32,55 @@ int	allocate_map(t_data *data)
 	return (1);
 }
 
+static int	check_extension(char *filename)
+{
+	char	*dot;
+	dot = ft_strrchr(filename, '.');
+	if (!dot || ft_strcmp(dot, ".cub") != 0)
+		return (0);
+	return (1);
+}
+
+static char *read_file(char *filename)
+{
+	int		fd;
+	char	*line;
+	char	*content;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	content = ft_strdup("");
+	while ((line = get_next_line(fd)))
+	{
+		content = ft_strjoin_free(content, line);
+		free(line);
+	}
+	close(fd);
+	return (content);
+}
+
 int	parse_file(t_data *data, char *filename)
 {
+	//set up les path 
+
+	char	*content;
+	char	**split_content;
+
+	content = NULL;
+	split_content = NULL;
+	if (!check_extension(char *filename))
+		return (write(2, "error, bad extension\n", 22), 0);
+	if ((content = read_file(char *filename)) == NULL)
+		return (write(2, "error, bad read\n", 17), 0);
+	split_content = ft_split(content, '\n');
+	ft_printf("%s", content); //test
+	free(content);
+
+
+
+
+
 	int i;
 
 	(void)filename; // Pour l'instant on ignore le fichier

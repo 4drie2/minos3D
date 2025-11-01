@@ -53,10 +53,10 @@ int	init_textures(t_data *data)
 	int		i;
 	char	*paths[4];
 
-	paths[0] = "./textures/north.xpm";
-	paths[1] = "./textures/south.xpm";
-	paths[2] = "./textures/east.xpm";
-	paths[3] = "./textures/west.xpm";
+	paths_no[0]
+	paths_so[1]
+	paths_we[2]
+	paths_ea[3]
 	i = 0;
 	while (i < 4)
 	{

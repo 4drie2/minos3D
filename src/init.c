@@ -43,6 +43,23 @@ void	init_player(t_player *player)
 	player->plane_y = 0.66;
 }
 
+static	init_config(t_config *config)
+{
+	config->no_text_path = NULL;
+	config->so_text_path = NULL;
+	config->we_text_path = NULL;
+	config->ea_text_path = NULL;
+	config->floor.r = -1;
+	config->floor.g = -1;
+	config->floor.b = -1;
+	config->sky.r = -1;
+	config->sky.g = -1;
+	config->sky.b = -1;
+	config->map_height = -1;
+	config->map_width = -1;
+	return ;
+}
+
 /*
 ** init_data : initialise MLX et crée la fenêtre + image
 ** 1. Connexion au serveur graphique (mlx_init)
@@ -66,6 +83,7 @@ int	init_data(t_data *data)
 			&data->img.line_length,
 			&data->img.endian);
 	init_player(&data->player);
+	intit_config(&data->config);
 	return (1);
 }
 

@@ -22,7 +22,7 @@ static void	draw_ceiling(t_data *data, t_ray *ray, int x)
 	y = 0;
 	while (y < ray->draw_start)
 	{
-		my_mlx_pixel_put(&data->img, x, y, 0x87CEEB);
+		my_mlx_pixel_put(&data->img, x, y, 0x87CEEB); //changer la couleur par ce qu'il va etre donné dans le .cub
 		y++;
 	}
 }
@@ -65,7 +65,7 @@ static void	draw_floor(t_data *data, t_ray *ray, int x)
 	y = ray->draw_end + 1;
 	while (y < WIN_HEIGHT)
 	{
-		my_mlx_pixel_put(&data->img, x, y, 0x404040);
+		my_mlx_pixel_put(&data->img, x, y, 0x404040); //changer la couleur par ce qu'il va etre donné dans le .cub
 		y++;
 	}
 }

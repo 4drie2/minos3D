@@ -68,6 +68,27 @@ typedef struct s_keys
 	int	right;
 }	t_keys;
 
+typedef struct t_colors
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_colors;
+
+
+typedef struct s_config
+{
+	char		*no_text_path;
+	char		*so_text_path;
+	char		*we_text_path;
+	char		*ea_text_path;
+	int			map_width;
+	int			map_height;
+	t_colors	floor;
+	t_colors	sky;
+}	t_config;
+
+
 typedef struct s_data
 {
 	void		*mlx;
@@ -75,10 +96,9 @@ typedef struct s_data
 	t_image		img;
 	t_player	player;
 	int			**map;
-	int			map_width;
-	int			map_height;
 	t_keys		keys;
 	t_texture	textures[4];
+	t_config	config;
 }	t_data;
 
 typedef struct s_ray
@@ -139,12 +159,7 @@ void	draw_vertical_line(t_data *data, t_ray *ray, int x);
 
 /* Parsing */
 int		parse_file(t_data *data, char *filename);
-int		allocate_map(t_data *data);
-void	fill_map_part1(t_data *data);
-void	fill_map_part2(t_data *data);
-void	fill_map_part3(t_data *data);
-void	fill_map_part4(t_data *data);
-void	init_map_row(int *row, int values[30]);
+
 
 /* Player */
 void	rotate_player(t_player *player, double angle);
