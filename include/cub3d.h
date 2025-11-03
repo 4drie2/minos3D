@@ -159,7 +159,16 @@ void	draw_vertical_line(t_data *data, t_ray *ray, int x);
 
 /* Parsing */
 int		parse_file(t_data *data, char *filename);
-
+int		is_map_start(char *line);
+void	parse_line(char *line, t_config *config);
+int		ft_array_len(char **array);
+void	ft_free_array(char **array):
+void	parse_map(char **lines, int start, t_config *config);
+void	validate_map_closed(t_config *config);
+int		is_valid_map_char(char c);
+char	**duplicate_map(char **map, int height, int width);
+void	flood_fill(char **map, int x, int y, t_config *config);
+void	check_edges(char **copy, t_config *config);
 
 /* Player */
 void	rotate_player(t_player *player, double angle);

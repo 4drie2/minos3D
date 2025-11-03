@@ -12,24 +12,42 @@
 
 #include "../include/cub3d.h"
 
-int	allocate_map(t_data *data)
+static int	all_elements_set(t_config *config)
 {
-	int	i;
-
-	data->map_height = 20;
-	data->map_width = 30;
-	data->map = malloc(sizeof(int *) * data->map_height);
-	if (!data->map)
+	if (!config->no_texture || !config->so_texture || !config->we_texture
+		|| !config->ea_texture || config->floor.r == -1
+		|| config->ceiling.r == -1)
 		return (0);
+	return (1);
+}
+
+static void	process_lines(char **split_content, t_config *config)
+{
+	int		i;
+	char	*trimmed;
+
 	i = 0;
-	while (i < data->map_height)
+	while (split_content[i])
 	{
-		data->map[i] = malloc(sizeof(int) * data->map_width);
-		if (!data->map[i])
-			return (0);
+		trimmed = ft_strtrim(split_content[i], " \t");
+		if (ft_strlen(trimmed) == 0)
+		{
+			free(trimmed);
+			i++;
+			continue;
+		}
+		if (is_map_start(trimmed))
+		{
+			free(trimmed);
+			break;
+		}
+		parse_line(trimmed, config);
+		free(trimmed);
 		i++;
 	}
-	return (1);
+	if (!all_element_set(config))
+		ft_error("Missing config elem");
+	parse_map(split_content, i, config);
 }
 
 static int	check_extension(char *filename)
@@ -62,8 +80,6 @@ static char *read_file(char *filename)
 
 int	parse_file(t_data *data, char *filename)
 {
-	//set up les path 
-
 	char	*content;
 	char	**split_content;
 
@@ -76,55 +92,6 @@ int	parse_file(t_data *data, char *filename)
 	split_content = ft_split(content, '\n');
 	ft_printf("%s", content); //test
 	free(content);
-
-
-
-
-
-	int i;
-
-	(void)filename; // Pour l'instant on ignore le fichier
-
-	// Allocation de la map - a calculer...
-	data->map_height = 8;
-	data->map_width = 8;
-	data->map = malloc(sizeof(int *) * data->map_height);
-	if (!data->map)
-		return (0);
-
-	// Map test : 1 = mur, 0 = vide
-	i = 0;
-	while (i < data->map_height)
-	{
-		data->map[i] = malloc(sizeof(int) * data->map_width);
-		if (!data->map[i])
-			return (0);
-		i++;
-	}
-
-	// Remplissage manuel (map fermée avec un espace au centre)
-	int temp_map[8][8] = {
-		{1, 1, 1, 1, 1, 1, 1, 1},
-		{1, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 1, 1, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 1},
-		{1, 1, 1, 1, 1, 1, 1, 1}
-	};
-
-	i = 0;
-	while (i < 8)
-	{
-		int j = 0;
-		while (j < 8)
-		{
-			data->map[i][j] = temp_map[i][j];
-			j++;
-		}
-		i++;
-	}
-
+	process_lines(split_content, data->config);
 	return (1);
 }
