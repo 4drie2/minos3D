@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:04:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 18:55:48 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/04 18:23:49 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init_player(t_player *player)
 	player->plane_y = 0.66;
 }
 
-static	init_config(t_config *config)
+static void	init_config(t_config *config)
 {
 	config->no_text_path = NULL;
 	config->so_text_path = NULL;
@@ -83,7 +83,7 @@ int	init_data(t_data *data)
 			&data->img.line_length,
 			&data->img.endian);
 	init_player(&data->player);
-	intit_config(&data->config);
+	init_config(&data->config);
 	return (1);
 }
 

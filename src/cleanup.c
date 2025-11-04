@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:04:24 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 18:55:26 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/04 17:50:23 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	cleanup_map(t_data *data)
 	if (data->map)
 	{
 		i = 0;
-		while (i < data->map_height)
+		while (i < data->config.map_height)
 		{
 			free(data->map[i]);
 			i++;

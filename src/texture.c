@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 15:10:45 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 18:57:20 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/04 19:42:03 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int	init_textures(t_data *data)
 	int		i;
 	char	*paths[4];
 
-	paths_no[0]
-	paths_so[1]
-	paths_we[2]
-	paths_ea[3]
+	paths[0] = data->config.no_text_path;
+	paths[1] = data->config.so_text_path;
+	paths[2] = data->config.we_text_path;
+	paths[3] = data->config.ea_text_path;
 	i = 0;
 	while (i < 4)
 	{

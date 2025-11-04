@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 18:15:01 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/04 19:36:24 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include "../minilibx-linux/mlx.h"
 #include "../minilibx-linux/mlx_int.h"
 #include "../libft/libft.h"
+#include "../libft/gnl.h"
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
@@ -56,6 +57,7 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+	char	player_dir;
 }	t_player;
 
 typedef struct s_keys
@@ -162,9 +164,8 @@ int		parse_file(t_data *data, char *filename);
 int		is_map_start(char *line);
 void	parse_line(char *line, t_config *config);
 int		ft_array_len(char **array);
-void	ft_free_array(char **array):
-void	parse_map(char **lines, int start, t_config *config);
-void	validate_map_closed(t_config *config);
+void	ft_free_array(char **array);
+void	parse_map(char **lines, int start, t_data *data);
 int		is_valid_map_char(char c);
 char	**duplicate_map(char **map, int height, int width);
 void	flood_fill(char **map, int x, int y, t_config *config);

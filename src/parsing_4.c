@@ -6,6 +6,7 @@ char	**duplicate_map(char **map, int height, int width)
 	char	**copy;
 	int		y;
 
+	(void)width;
 	copy = malloc(sizeof(char *) * (height + 1));
 	if (!copy)
 		ft_error("Malloc fail");
