@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 16:17:40 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 18:55:04 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/05 18:28:40 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ int	main(int argc, char *argv[])
 		ft_error("parsing failed");
 	if (!init_textures(&data))
 		ft_error("Failed to load textures");
-	// mlx_hook(data.win, 17, 0, close_window, &data);
-	// mlx_hook(data.win, KeyPress, KeyPressMask, key_press, &data);
-	// mlx_hook(data.win, KeyRelease, KeyReleaseMask, key_release, &data);
-	// mlx_loop_hook(data.mlx, render_frame, &data);
-	// mlx_loop(data.mlx);
+	mlx_hook(data.win, 17, 0, close_window, &data);
+	mlx_hook(data.win, KeyPress, KeyPressMask, key_press, &data);
+	mlx_hook(data.win, KeyRelease, KeyReleaseMask, key_release, &data);
+	mlx_loop_hook(data.mlx, render_frame, &data);
+	mlx_loop(data.mlx);
 	return (0);
 }

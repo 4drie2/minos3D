@@ -6,7 +6,7 @@
 /*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/04 19:36:24 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/04 20:20:10 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 #include "../minilibx-linux/mlx.h"
 #include "../minilibx-linux/mlx_int.h"
 #include "../libft/libft.h"
-#include "../libft/gnl.h"
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080

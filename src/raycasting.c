@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:15 by abidaux           #+#    #+#             */
-/*   Updated: 2025/10/31 18:56:59 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/06 00:12:54 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,6 @@ void	init_step(t_data *data, t_ray *ray)
 	}
 }
 
-/*
-** calculate_wall_distance : calcule la distance perpendiculaire au mur
-**
-** On utilise la distance PERPENDICULAIRE (pas euclidienne)
-** Sinon effet "fisheye" (distorsion)
-*/
 /*
 ** cast_rays : fonction principale du raycasting
 ** Lance un rayon pour chaque colonne de l'écran
