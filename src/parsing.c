@@ -30,7 +30,7 @@ static void	process_lines(char **split_content, t_data *data)
 	while (split_content[i])
 	{
 		ft_printf("before trimmed : %s\n", split_content[i]); //test
-		trimmed = ft_strtrim(split_content[i], " \t");
+		trimmed = ft_strtrim(split_content[i], "\t");
 		ft_printf("After trimmed : %s\n", trimmed); //test
 		if (ft_strlen(trimmed) == 0)
 		{
@@ -40,6 +40,7 @@ static void	process_lines(char **split_content, t_data *data)
 		}
 		if (is_map_start(trimmed))
 		{
+			ft_printf("found map at line : %s\n", trimmed); //test
 			free(trimmed);
 			break;
 		}
@@ -91,8 +92,8 @@ int	parse_file(t_data *data, char *filename)
 		return (write(2, "error, bad extension\n", 22), 0);
 	if ((content = read_file(filename)) == NULL)
 		return (write(2, "error, bad read\n", 17), 0);
+	ft_printf("print of content before first split : \n%s\n", content); //test
 	split_content = ft_split(content, '\n');
-	ft_printf("%s", content); //test
 	free(content);
 	process_lines(split_content, data);
 	return (1);

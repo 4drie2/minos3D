@@ -54,16 +54,16 @@ static void	store_map_line(t_data *data, char *line, int y)
 {
 	int	x;
 
-	data->map[y] = malloc(data->config.map_width + 1);
+	data->map[y] = malloc(data->config.map_width);
 	if (!data->map[y])
 		ft_error("Malloc fail");
 	ft_memset(data->map[y], ' ', data->config.map_width);
-	ft_strlcpy((char *)data->map[y], line, ft_strlen(line) + 1);
-	data->map[y][data->config.map_width] = '\0';
+	ft_strlcpy(data->map[y], line, ft_strlen(line)); // ici peut être pb car line = char * et que data.map = int *, faut il utiliser atoi?
+	// data->map[y][data->config.map_width] = '\0'; //useless in int *
 	x = 0;
 	while (x < data->config.map_width)
 	{
-		if (!is_valid_map_char((char)data->map[y][x]))
+		if (!is_valid_map_char((char)data->map[y][x])) // à changer aussi pour le int *
 			ft_error("Invalid map char");
 		x++;
 	}
@@ -87,7 +87,7 @@ void	parse_map(char **lines, int start, t_data *data)
 		height++;
 		y++;
 	}
-	data->map = malloc(sizeof(char *) * (height + 1));
+	data->map = malloc(sizeof(int *) * (height));
 	if (!data->map)
 		ft_error("Malloc fail");
 	data->config.map_height = height;
@@ -100,13 +100,13 @@ void	parse_map(char **lines, int start, t_data *data)
 		x = 0;
 		while (x < width)
 		{
-			find_player(data, &player_count, x, y);
+			find_player(data, &player_count, x, y); //à changer pour du int * aussi
 			x++;
 		}
 		y++;
 	}
-	data->map[height] = NULL;
+	data->map[height] = NULL; //utile dans int *?
 	if (player_count != 1)
 		ft_error("Invalid player count");
-	validate_map_closed(data);
+	validate_map_closed(data); //à changer pour du int
 }
