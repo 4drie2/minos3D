@@ -50,7 +50,7 @@ static void	find_player(t_data *data, int *player_count, int x, int y)
 	(*player_count)++;
 }
 
-static void	store_map_line(t_data *data, char *line, int y)
+static void	store_map_line(t_data *data, char *line, int y) // Refaire la fonction et la placer à la fin du parsing pour juste copier la map d'un coup si tout est ok
 {
 	int	x;
 
@@ -63,7 +63,8 @@ static void	store_map_line(t_data *data, char *line, int y)
 	x = 0;
 	while (x < data->config.map_width)
 	{
-		if (!is_valid_map_char((char)data->map[y][x])) // à changer aussi pour le int *
+		// ft_printf("before is_valid_map_char")
+		if (!is_valid_map_char((char)data->map[y][x])) // à changer aussi pour le int * // pourquoi déjàa dans data->map, je peux juste check ce qu'il y a sur la ligne??
 			ft_error("Invalid map char");
 		x++;
 	}
@@ -96,7 +97,7 @@ void	parse_map(char **lines, int start, t_data *data)
 	player_count = 0;
 	while (y < height)
 	{
-		store_map_line(data, lines[start + y], y);
+		store_map_line(data, lines[start + y], y); // placer à la fin, remplacer par is_valide_map_char
 		x = 0;
 		while (x < width)
 		{
