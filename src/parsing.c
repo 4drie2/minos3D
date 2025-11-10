@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:00:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/04 19:35:18 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/10 13:35:07 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ static void	process_lines(char **split_content, t_data *data)
 	i = 0;
 	while (split_content[i])
 	{
-		ft_printf("before trimmed : %s\n", split_content[i]); //test
-		trimmed = ft_strtrim(split_content[i], "\t");
-		ft_printf("After trimmed : %s\n", trimmed); //test
-		if (ft_strlen(trimmed) == 0)
-		{
-			free(trimmed);
-			i++;
-			continue;
-		}
+		// trimmed = ft_strtrim(split_content[i], "\t"); //useless car on ne doit handle que les spaces
+		trimmed = ft_strdup(split_content[i]);	
+		// ft_printf("After trimmed : %s\n", trimmed); //test
+		// if (ft_strlen(trimmed) == 0)
+		// {
+		// 	free(trimmed);
+		// 	i++;
+		// 	continue;
+		// }
 		if (is_map_start(trimmed))
 		{
 			ft_printf("found map at line : %s\n", trimmed); //test
@@ -75,7 +75,6 @@ static char *read_file(char *filename)
 	while ((line = get_next_line(fd)))
 	{
 		content = ft_strjoin_free(content, line);
-		free(line);
 	}
 	close(fd);
 	return (content);
@@ -92,7 +91,6 @@ int	parse_file(t_data *data, char *filename)
 		return (write(2, "error, bad extension\n", 22), 0);
 	if ((content = read_file(filename)) == NULL)
 		return (write(2, "error, bad read\n", 17), 0);
-	ft_printf("print of content before first split : \n%s\n", content); //test
 	split_content = ft_split(content, '\n');
 	free(content);
 	process_lines(split_content, data);

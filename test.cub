@@ -3,6 +3,10 @@ SO ./textures-stylemineraft/.south.xpm
 WE ./textures-stylemineraft/.west.xpm
 EA ./textures-stylemineraft/.east.xpm
 
+
+
+
+
 F 220,100,0
 C 225,30,0
 
