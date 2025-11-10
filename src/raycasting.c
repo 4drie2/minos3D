@@ -6,7 +6,7 @@
 /*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:15 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/06 00:12:54 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/10 20:48:34 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@
 */
 void	perform_dda(t_data *data, t_ray *ray)
 {
-	int	hit;
-
-	hit = 0;
-	while (hit == 0)
+	while (true)
 	{
 		if (ray->side_dist_x < ray->side_dist_y)
 		{
@@ -42,7 +39,7 @@ void	perform_dda(t_data *data, t_ray *ray)
 			ray->side = 1;
 		}
 		if (data->map[ray->map_y][ray->map_x] > 0)
-			hit = 1;
+			break ;
 	}
 }
 
