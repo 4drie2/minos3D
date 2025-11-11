@@ -6,7 +6,7 @@
 /*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/04 20:20:10 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/11 08:51:32 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,7 @@ int		render_frame(t_data *data);
 void	cast_rays(t_data *data);
 
 /* raycasting_utils.c */
-void	calculate_wall_distance(t_data *data, t_ray *ray);
-void	calculate_line_height(t_ray *ray);
+void	calculate_wall_height(t_data *data, t_ray *ray);
 void	calculate_texture_x(t_data *data, t_ray *ray);
 
 /* raycasting_draw.c */

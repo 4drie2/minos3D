@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:15 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 04:31:18 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/11 08:51:31 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,7 @@ void	cast_rays(t_data *data)
 		init_ray(data, &ray, x);
 		init_step(data, &ray);
 		perform_dda(data, &ray);
-		calculate_wall_distance(data, &ray);
-		calculate_line_height(&ray);
+		calculate_wall_height(data, &ray);
 		calculate_texture_x(data, &ray);
 		draw_vertical_line(data, &ray, x);
 		x++;

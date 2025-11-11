@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:03:43 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 04:31:41 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/11 08:51:34 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 /*
-** calculate_wall_distance : calcule la distance perpendiculaire au mur
+** calculate_wall_height : calcule la distance au mur et sa hauteur à l'écran
 **
-** On utilise la distance PERPENDICULAIRE (pas euclidienne)
-** Sinon effet "fisheye" (distorsion)
+** 1. Calcule la distance PERPENDICULAIRE au mur (pas euclidienne)
+**    pour éviter l'effet "fisheye" (distorsion)
+** 2. Calcule la hauteur du mur à l'écran (plus proche = plus grand)
+** 3. Détermine les limites verticales de dessin (draw_start/draw_end)
 */
-void	calculate_wall_distance(t_data *data, t_ray *ray)
+void	calculate_wall_height(t_data *data, t_ray *ray)
 {
 	if (ray->side == 0)
 		ray->perp_wall_dist = (ray->map_x - data->player.pos_x
@@ -26,16 +28,6 @@ void	calculate_wall_distance(t_data *data, t_ray *ray)
 	else
 		ray->perp_wall_dist = (ray->map_y - data->player.pos_y
 				+ (1 - ray->step_y) / 2) / ray->dir_y;
-}
-
-/*
-** calculate_line_height : calcule la hauteur du mur à l'écran
-**
-** Plus le mur est proche, plus il est grand
-** line_height = hauteur_écran / distance
-*/
-void	calculate_line_height(t_ray *ray)
-{
 	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
 	ray->draw_start = -ray->line_height / 2 + WIN_HEIGHT / 2;
 	if (ray->draw_start < 0)
