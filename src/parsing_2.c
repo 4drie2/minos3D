@@ -6,17 +6,16 @@ static void	parse_color(char *str, t_colors *color, int *err)
 {
 	char	**rgb;
 
+	*err = 0;
 	rgb = ft_split(str, ',');
 	if (!rgb)
 	{
-		err = 0;
-		return (write(2, "bad split parscol\n", 19));
+		return ((void)write(2, "bad split parscol\n", 18));
 	}
 	if (ft_array_len(rgb) != 3)
 	{
-		err = 0;
 		ft_free_array(rgb);
-		return (write(2, "Invalid color format\n", 22));
+		return ((void)write(2, "Invalid color format\n", 22));
 	}
 	color->r = ft_atoi(rgb[0]);
 	color->g = ft_atoi(rgb[1]);
@@ -24,10 +23,10 @@ static void	parse_color(char *str, t_colors *color, int *err)
 	if (color->r < 0 || color->r > 255 || color->g < 0 || color->g > 255
 		|| color->b < 0 || color->b > 255)
 	{
-		err = 0;
 		ft_free_array(rgb);
-		return (write(2, "Color out of range\n", 20));
+		return ((void)write(2, "Color out of range\n", 20));
 	}
+	*err = 1;
 	ft_free_array(rgb);
 }
 
