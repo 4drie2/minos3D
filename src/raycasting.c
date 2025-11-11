@@ -6,7 +6,7 @@
 /*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:15 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 08:51:31 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/11 09:34:45 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,4 +117,18 @@ void	cast_rays(t_data *data)
 		draw_vertical_line(data, &ray, x);
 		x++;
 	}
+}
+
+/*
+** render_frame : appelée à chaque frame
+** Lance le raycasting et affiche l'image
+**
+** Optimisation : on réutilise la même image au lieu de la recréer
+*/
+int	render_frame(t_data *data)
+{
+	update_movement(data);
+	cast_rays(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
+	return (0);
 }
