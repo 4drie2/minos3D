@@ -6,7 +6,7 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 19:40:58 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/11 20:09:09 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void	draw_vertical_line(t_data *data, t_ray *ray, int x);
 /* Parsing */
 int		parse_file(t_data *data, char *filename);
 int		is_map_start(char *line);
-int		parse_line(char *line, t_config *config, t_data *data);
+int		parse_line(char *line, t_config *config);
 int		ft_array_len(char **array);
 void	ft_free_array(char **array);
 int		parse_map(char **lines, int start, t_data *data);

@@ -6,7 +6,7 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:04:24 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 18:39:47 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/11 20:30:38 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	cleanup_map(t_data *data)
 */
 void	cleanup(t_data *data)
 {
+	if (!data)
+		return ;
 	free_textures(data);
 	if (data->img.img)
 		mlx_destroy_image(data->mlx, data->img.img);
@@ -48,8 +50,3 @@ void	cleanup(t_data *data)
 	}
 	cleanup_map(data);
 }
-
-// void	free_all(t_data *data)
-// {
-
-// }

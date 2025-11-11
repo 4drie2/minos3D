@@ -6,7 +6,7 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 16:17:40 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 19:23:58 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/11 20:28:08 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ int	main(int argc, char *argv[])
 {
 	t_data	data;
 
-	// if (argc != 2)
-		// return (write(2, "Not enough args\n", 17));
-	(void)argv;
-	(void)argc;
+	if (argc != 2)
+		return (write(2, "Not enough args\n", 16));
 	ft_memset(&data.keys, 0, sizeof(t_keys));
 	if (!init_data(&data))
 		ft_error("Initialization failed", &data);

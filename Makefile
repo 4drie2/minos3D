@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adrien <adrien@student.42.fr>              +#+  +:+       +#+         #
+#    By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/28 16:14:19 by abidaux           #+#    #+#              #
-#    Updated: 2025/11/05 18:17:07 by adrien           ###   ########.fr        #
+#    Updated: 2025/11/11 20:18:53 by plerick          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME		= cub3d
 
 # --- Compilateur et Flags ---
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra -g
 INCLUDES	= -I$(MLX_DIR) -I$(LIBFT_DIR) -Iinclude
 LDFLAGS		= -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lX11 -lXext -lm -lbsd
 

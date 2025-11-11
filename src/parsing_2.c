@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_2.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/11 20:22:18 by plerick           #+#    #+#             */
+/*   Updated: 2025/11/11 20:28:51 by plerick          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 
 #include "../include/cub3d.h"
@@ -15,7 +26,7 @@ static void	parse_color(char *str, t_colors *color, int *err)
 	if (ft_array_len(rgb) != 3)
 	{
 		ft_free_array(rgb);
-		return ((void)write(2, "Invalid color format\n", 22));
+		return ((void)write(2, "Invalid color format\n", 21));
 	}
 	color->r = ft_atoi(rgb[0]);
 	color->g = ft_atoi(rgb[1]);
@@ -24,7 +35,7 @@ static void	parse_color(char *str, t_colors *color, int *err)
 		|| color->b < 0 || color->b > 255)
 	{
 		ft_free_array(rgb);
-		return ((void)write(2, "Color out of range\n", 20));
+		return ((void)write(2, "Color out of range\n", 19));
 	}
 	*err = 1;
 	ft_free_array(rgb);
@@ -34,13 +45,14 @@ static void	validate_texture(char *path, int *err)
 {
 	int	fd;
 
+	*err = 0;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
-		write(2, "Texture file not found\n", 24);
-		err = 0;
+		write(2, "Texture file not found\n", 23);
 		return ;
 	}
+	*err = 1;
 	close(fd);
 }
 
@@ -68,12 +80,12 @@ static void	parse_texture(char **split, t_config *config, int *err)
 	}
 	else
 	{
-		write(2, "Invalid or duplicate texture\n", 30);
-		err = 0;
+		write(2, "Invalid or duplicate texture\n", 29);
+		*err = 0;
 	}
 }
 
-int	parse_line(char *line, t_config *config, t_data *data)
+int	parse_line(char *line, t_config *config)
 {
 	char	**split;
 	int		err;
@@ -81,11 +93,11 @@ int	parse_line(char *line, t_config *config, t_data *data)
 	err = 1;
 	split = ft_split(line, ' ');
 	if (!split)
-		return (write(2, "bad split\n", 11), 0);
+		return (write(2, "bad split\n", 10), 0);
 	if (ft_array_len(split) != 2)
 	{
 		ft_free_array(split);
-		return (write(2, "Invalid config line", 20), 0);
+		return (write(2, "Invalid config line", 19), 0);
 	}
 	if (ft_strcmp(split[0], "NO") == 0 || ft_strcmp(split[0], "SO") == 0
 		|| ft_strcmp(split[0], "WE") == 0 || ft_strcmp(split[0], "EA") == 0)
@@ -96,8 +108,8 @@ int	parse_line(char *line, t_config *config, t_data *data)
 		parse_color(split[1], &config->sky, &err);
 	else
 	{
-		ft_free_array(split);
-		return (write(2, "Invalid or duplicate config", 28), 0);
+		
+		return (ft_free_array(split), write(2, "Invalid or duplicate config", 27), 0);
 	}
 	ft_free_array(split);
 	return (err);

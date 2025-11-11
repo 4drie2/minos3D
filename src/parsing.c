@@ -6,7 +6,7 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:00:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 19:43:01 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/11 20:29:57 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ static int	process_lines(char **split_content, t_data *data)
 			free(trimmed);
 			break;
 		}
-		if (!(parse_line(trimmed, &data->config, &data)))
+		if (!(parse_line(trimmed, &data->config)))
 		{
 			free(trimmed);
-			return(write(2, "error in parsing\n", 18), 0);
+			return(write(2, "error in parsing\n", 17), 0);
 		}
 		free(trimmed);
 		i++;
 	}
 	if (!all_elements_set(&data->config))
-		return (write(2, "Missing config elem\n", 21), 0);
+		return (write(2, "Missing config elem\n", 20), 0);
 	if (!parse_map(split_content, i, data))
-		return (write(2, "bad parse of map\n", 18), 0);
-		
+		return (write(2, "bad parse of map\n", 17), 0);
+	return (1);
 }
 
 static int	check_extension(char *filename)
@@ -85,12 +85,12 @@ int	parse_file(t_data *data, char *filename)
 	content = NULL;
 	split_content = NULL;
 	if (!check_extension(filename))
-		return (write(2, "error, bad extension\n", 22), 0);
+		return (write(2, "error, bad extension\n", 21), 0);
 	if ((content = read_file(filename)) == NULL)
-		return (write(2, "error, bad read\n", 17), 0);
+		return (write(2, "error, bad read\n", 16), 0);
 	data->content = content;
 	if (!(split_content = ft_split(content, '\n')))
-		return (write(2, "bad split\n", 11), 0);
+		return (write(2, "bad split\n", 10), 0);
 	data->split_content = split_content;
 	free(content);
 	if (!(process_lines(split_content, data)))

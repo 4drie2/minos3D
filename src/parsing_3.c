@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_3.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/11 20:22:33 by plerick           #+#    #+#             */
+/*   Updated: 2025/11/11 20:29:21 by plerick          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "../include/cub3d.h"
 
@@ -8,11 +20,11 @@ static int	validate_map_closed(t_data *data, char **lines, int start)
 
 	ret = 0;
 	if ((copy = duplicate_map(lines, data->config.map_height, start)) == NULL)
-		return (write(2, "bad copy of map\n", 17), 0);
+		return (write(2, "bad copy of map\n", 16), 0);
 	flood_fill(copy, (int)data->player.pos_x, (int)data->player.pos_y, &ret);
 	ft_free_array(copy);
 	if (ret != 0)
-		return (write(2, "map not good with flood_fill\n", 30), 0);
+		return (write(2, "map not good with flood_fill\n", 29), 0);
 	return (1);
 }
 
@@ -75,13 +87,13 @@ static void	map_to_int(t_data *data, char **lines, int start)
 
 	data->map = malloc(sizeof(int *) * data->config.map_height);
 	if (!data->map)
-		ft_error("Malloc failed for map_int", &data);
+		ft_error("Malloc failed for map_int", data);
 	y = 0;
 	while (y < data->config.map_height)
 	{
 		data->map[y] = malloc(sizeof(int) * data->config.map_width);
 		if (!data->map[y])
-			ft_error("Malloc failed for map_int[y]", &data);
+			ft_error("Malloc failed for map_int[y]", data);
 		len = ft_strlen(lines[start + y]);
 		x = 0;
 		while (x < data->config.map_width)
@@ -131,8 +143,9 @@ int	parse_map(char **lines, int start, t_data *data)
 		y++;
 	}
 	if (player_count != 1)
-		return (write(2, "Invalid player count\n", 22), 0);
+		return (write(2, "Invalid player count\n", 21), 0);
 	if (!validate_map_closed(data, lines, start))
-		return (write(2, "Invalid map\n", 13), 0);
+		return (write(2, "Invalid map\n", 12), 0);
 	map_to_int(data, lines, start);
+	return (1);
 }

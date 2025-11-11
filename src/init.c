@@ -6,7 +6,7 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:04:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 19:28:30 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/11 20:17:38 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,7 @@ int	init_data(t_data *data)
 void	ft_error(char *msg, t_data *data)
 {
 	write(2, "Error\n", 6);
-	write(2, msg, 0);
-	while (msg && *msg)
-	{
-		write(2, msg, 1);
-		msg++;
-	}
+	write(2, msg, ft_strlen(msg));
 	write(2, "\n", 1);
 	cleanup(data);
 	exit(1);
