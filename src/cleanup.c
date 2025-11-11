@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:04:24 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 04:31:48 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/11 18:39:47 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,8 @@ void	cleanup(t_data *data)
 	}
 	cleanup_map(data);
 }
+
+// void	free_all(t_data *data)
+// {
+
+// }

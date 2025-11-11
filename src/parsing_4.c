@@ -1,58 +1,38 @@
 
 #include "../include/cub3d.h"
 
-char	**duplicate_map(char **map, int height, int width)
+char	**duplicate_map(char **map, int height, int start)
 {
 	char	**copy;
 	int		y;
 
-	(void)width;
 	copy = malloc(sizeof(char *) * (height + 1));
 	if (!copy)
-		ft_error("Malloc fail");
+		return (NULL);
 	y = 0;
 	while (y < height)
 	{
-		copy[y] = ft_strdup(map[y]);
+		copy[y] = ft_strdup(map[y + start]);
 		y++;
 	}
 	copy[height] = NULL;
 	return (copy);
 }
 
-void	flood_fill(char **map, int x, int y, t_config *config)
+void	flood_fill(char **map, int x, int y, int *ret)
 {
-	if (x < 0 || x >= config->map_width || y < 0 || y >= config->map_height)
-		return ;
-	if (map[y][x] == '1' || map[y][x] == 'X')
-		return ;
-	if (map[y][x] == ' ' || map[y][x] == '0')
-		map[y][x] = 'X';
-	flood_fill(map, x + 1, y, config);
-	flood_fill(map, x - 1, y, config);
-	flood_fill(map, x, y + 1, config);
-	flood_fill(map, x, y - 1, config);
-}
-
-void	check_edges(char **copy, t_config *config)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < config->map_height)
+	if (y < 0 || (size_t)x > ft_strlen(map[y]) || x < 0
+		|| map[y][x] == '\n' || map[y][x] == '\0' || map[y][x] == ' ')
 	{
-		x = 0;
-		while (x < config->map_width)
-		{
-			if (copy[y][x] == '0' || copy[y][x] == ' ')
-			{
-				if (x == 0 || x == config->map_width - 1
-					|| y == 0 || y == config->map_height - 1)
-					ft_error("Map not closed");
-			}
-			x++;
-		}
-		y++;
+		(*ret)++;
+		return ;
 	}
+	if (map[y][x] == '1' || map[y][x] == 'F')
+		return ;
+	map[y][x] = 'F';
+	flood_fill(map, x, y - 1, ret);
+	flood_fill(map, x, y + 1, ret);
+	flood_fill(map, x - 1, y, ret);
+	flood_fill(map, x + 1, y, ret);
 }
+

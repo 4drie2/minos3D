@@ -1,14 +1,19 @@
 
 #include "../include/cub3d.h"
 
-static void	validate_map_closed(t_data *data)
+static int	validate_map_closed(t_data *data, char **lines, int start)
 {
 	char	**copy;
+	int		ret;
 
-	copy = duplicate_map((char **)data->map, data->config.map_height, data->config.map_width);
-	flood_fill(copy, (int)data->player.pos_x, (int)data->player.pos_y, &data->config);
-	check_edges(copy, &data->config);
+	ret = 0;
+	if ((copy = duplicate_map(lines, data->config.map_height, start)) == NULL)
+		return (write(2, "bad copy of map\n", 17), 0);
+	flood_fill(copy, (int)data->player.pos_x, (int)data->player.pos_y, &ret);
 	ft_free_array(copy);
+	if (ret != 0)
+		return (write(2, "map not good with flood_fill\n", 30), 0);
+	return (1);
 }
 
 static void	find_player(t_data *data, int *player_count, int x, int y, char **lines)
@@ -16,7 +21,6 @@ static void	find_player(t_data *data, int *player_count, int x, int y, char **li
 	char	c;
 
 	c = lines[y][x];
-	printf("%c", c);
 	if (!(c == 'N' || c == 'S' || c == 'E' || c == 'W'))
 		return ;
 	if (c == 'N')
@@ -48,50 +52,61 @@ static void	find_player(t_data *data, int *player_count, int x, int y, char **li
 		data->player.plane_y = 0.0;
 	}
 	data->player.pos_x = x;
-	data->player.pos_y = y;
 	lines[y][x] = '0';
 	(*player_count)++;
 }
 
-static void	store_map_line(t_data *data, char *line, int y) // Refaire la fonction et la placer à la fin du parsing pour juste copier la map d'un coup si tout est ok
-{
-	int	x;
+#include "cub3d.h"
 
-	data->map[y] = malloc(data->config.map_width);
-	if (!data->map[y])
-		ft_error("Malloc fail");
-	ft_memset(data->map[y], ' ', data->config.map_width);
-	// ft_strlcpy(data->map[y], line, ft_strlen(line)); // ici peut être pb car line = char * et que data.map = int *, faut il utiliser atoi?
-	// data->map[y][data->config.map_width] = '\0'; //useless in int *
-	x = 0;
-	while (x < data->config.map_width)
+static int	char_to_int(char c)
+{
+	if (c == '1')
+		return (1);
+	if (c == '0' || c == ' ')
+		return (0);
+	return (0);
+}
+
+static void	map_to_int(t_data *data, char **lines, int start)
+{
+	int	y;
+	int	x;
+	int	len;
+
+	data->map = malloc(sizeof(int *) * data->config.map_height);
+	if (!data->map)
+		ft_error("Malloc failed for map_int", &data);
+	y = 0;
+	while (y < data->config.map_height)
 	{
-		// ft_printf("before is_valid_map_char")
-		if (!is_valid_map_char(line[x])) // à changer aussi pour le int * // pourquoi déjàa dans data->map, je peux juste check ce qu'il y a sur la ligne??
-			ft_error("Invalid map char");
-		x++;
+		data->map[y] = malloc(sizeof(int) * data->config.map_width);
+		if (!data->map[y])
+			ft_error("Malloc failed for map_int[y]", &data);
+		len = ft_strlen(lines[start + y]);
+		x = 0;
+		while (x < data->config.map_width)
+		{
+			if (x < len)
+				data->map[y][x] = char_to_int(lines[start + y][x]);
+			else
+				data->map[y][x] = 0;
+			x++;
+		}
+		y++;
 	}
 }
 
-void	parse_map(char **lines, int start, t_data *data)
+int	parse_map(char **lines, int start, t_data *data)
 {
 	int	height;
 	int	width;
 	int	y;
 	int	player_count;
 	int	x;
-	int	i;
 
 	height = 0;
 	width = 0;
 	y = start;
-	i = 0;
-	while(lines[i])
-	{
-		printf("%s\n", lines[i]);
-		i++;
-	}
-	printf("eeeend\n");
 	while (lines[y])
 	{
 		if (ft_strlen(lines[y]) > (size_t)width)
@@ -99,29 +114,25 @@ void	parse_map(char **lines, int start, t_data *data)
 		height++;
 		y++;
 	}
-	// data->map = malloc(sizeof(int *) * (height));
-	// if (!data->map)
-	// 	ft_error("Malloc fail");
 	data->config.map_height = height;
 	data->config.map_width = width;
 	y = 0;
 	player_count = 0;
-	while (y < height)
+	while (y < height)	
 	{
 		x = 0;
-		while (x < width)
+		while (x < width && lines[y + start][x])
 		{
 			find_player(data, &player_count, x, start + y, lines);
+			if (data->player.pos_x != -1 && data->player.pos_y == -1)
+				data->player.pos_y = y;
 			x++;
 		}
-		printf("\n");
 		y++;
 	}
-	// data->map[height] = NULL; //utile dans int *?
-	printf("player count : %i\n", player_count);
 	if (player_count != 1)
-		ft_error("Invalid player count");
-	validate_map_closed(data);
-	y = 0;
-	store_map_line(data, lines[start + y], y);
+		return (write(2, "Invalid player count\n", 22), 0);
+	if (!validate_map_closed(data, lines, start))
+		return (write(2, "Invalid map\n", 13), 0);
+	map_to_int(data, lines, start);
 }

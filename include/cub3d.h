@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 08:51:32 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/11 19:40:58 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ typedef struct s_data
 	t_keys		keys;
 	t_texture	textures[4];
 	t_config	config;
+	char		**split_content;
+	char		*filename;
+	char		*content;
 }	t_data;
 
 typedef struct s_ray
@@ -126,7 +129,7 @@ typedef struct s_ray
 
 // Main
 void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
-void	ft_error(char *msg);
+void	ft_error(char *msg, t_data *data);
 void	cleanup(t_data *data);
 int		close_window(t_data *data);
 
@@ -134,7 +137,6 @@ int		close_window(t_data *data);
 void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void	init_player(t_player *player);
 int		init_data(t_data *data);
-void	ft_error(char *msg);
 
 // Events
 int		key_release(int keycode, t_data *data);
@@ -160,13 +162,13 @@ void	draw_vertical_line(t_data *data, t_ray *ray, int x);
 /* Parsing */
 int		parse_file(t_data *data, char *filename);
 int		is_map_start(char *line);
-void	parse_line(char *line, t_config *config);
+int		parse_line(char *line, t_config *config, t_data *data);
 int		ft_array_len(char **array);
 void	ft_free_array(char **array);
-void	parse_map(char **lines, int start, t_data *data);
+int		parse_map(char **lines, int start, t_data *data);
 int		is_valid_map_char(char c);
-char	**duplicate_map(char **map, int height, int width);
-void	flood_fill(char **map, int x, int y, t_config *config);
+char	**duplicate_map(char **map, int height, int start);
+void	flood_fill(char **map, int x, int y, int *ret);
 void	check_edges(char **copy, t_config *config);
 
 /* Player */

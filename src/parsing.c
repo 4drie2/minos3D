@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:00:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 04:31:46 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/11 19:43:01 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	all_elements_set(t_config *config)
 	return (1);
 }
 
-static void	process_lines(char **split_content, t_data *data)
+static int	process_lines(char **split_content, t_data *data)
 {
 	int		i;
 	char	*trimmed;
@@ -29,28 +29,25 @@ static void	process_lines(char **split_content, t_data *data)
 	i = 0;
 	while (split_content[i])
 	{
-		// trimmed = ft_strtrim(split_content[i], "\t"); //useless car on ne doit handle que les spaces
 		trimmed = ft_strdup(split_content[i]);	
-		// ft_printf("After trimmed : %s\n", trimmed); //test
-		// if (ft_strlen(trimmed) == 0)
-		// {
-		// 	free(trimmed);
-		// 	i++;
-		// 	continue;
-		// }
 		if (is_map_start(trimmed))
 		{
-			ft_printf("found map at line : %s\n", trimmed); //test
 			free(trimmed);
 			break;
 		}
-		parse_line(trimmed, &data->config);
+		if (!(parse_line(trimmed, &data->config, &data)))
+		{
+			free(trimmed);
+			return(write(2, "error in parsing\n", 18), 0);
+		}
 		free(trimmed);
 		i++;
 	}
 	if (!all_elements_set(&data->config))
-		ft_error("Missing config elem");
-	parse_map(split_content, i, data);
+		return (write(2, "Missing config elem\n", 21), 0);
+	if (!parse_map(split_content, i, data))
+		return (write(2, "bad parse of map\n", 18), 0);
+		
 }
 
 static int	check_extension(char *filename)
@@ -91,8 +88,13 @@ int	parse_file(t_data *data, char *filename)
 		return (write(2, "error, bad extension\n", 22), 0);
 	if ((content = read_file(filename)) == NULL)
 		return (write(2, "error, bad read\n", 17), 0);
-	split_content = ft_split(content, '\n');
+	data->content = content;
+	if (!(split_content = ft_split(content, '\n')))
+		return (write(2, "bad split\n", 11), 0);
+	data->split_content = split_content;
 	free(content);
-	process_lines(split_content, data);
+	if (!(process_lines(split_content, data)))
+		return (0);
+	ft_free_array(split_content);
 	return (1);
 }

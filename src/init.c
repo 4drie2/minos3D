@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:04:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/04 18:23:49 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/11 19:28:30 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
 */
 void	init_player(t_player *player)
 {
-	player->pos_x = 3.5;
-	player->pos_y = 3.5;
+	player->pos_x = -1;
+	player->pos_y = -1;
 	player->dir_x = -1.0;
 	player->dir_y = 0.0;
 	player->plane_x = 0.0;
@@ -82,6 +82,9 @@ int	init_data(t_data *data)
 			&data->img.bits_per_pixel,
 			&data->img.line_length,
 			&data->img.endian);
+	data->split_content = NULL;
+	data->filename = NULL;
+	data->content = NULL;
 	init_player(&data->player);
 	init_config(&data->config);
 	return (1);
@@ -90,7 +93,7 @@ int	init_data(t_data *data)
 /*
 ** ft_error : affiche un message d'erreur et quitte
 */
-void	ft_error(char *msg)
+void	ft_error(char *msg, t_data *data)
 {
 	write(2, "Error\n", 6);
 	write(2, msg, 0);
@@ -100,5 +103,6 @@ void	ft_error(char *msg)
 		msg++;
 	}
 	write(2, "\n", 1);
+	cleanup(data);
 	exit(1);
 }
