@@ -6,7 +6,7 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:00:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 20:29:57 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/12 19:27:11 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static int	process_lines(char **split_content, t_data *data)
 		if (!(parse_line(trimmed, &data->config)))
 		{
 			free(trimmed);
-			return(write(2, "error in parsing\n", 17), 0);
+			data->check_err_pro_line = 1;
+			return(free_config_struc(&data->config), write(2, "error in parsing\n", 17), 0);
 		}
 		free(trimmed);
 		i++;
@@ -94,7 +95,7 @@ int	parse_file(t_data *data, char *filename)
 	data->split_content = split_content;
 	free(content);
 	if (!(process_lines(split_content, data)))
-		return (0);
+		return (ft_free_array(split_content), 0);
 	ft_free_array(split_content);
 	return (1);
 }

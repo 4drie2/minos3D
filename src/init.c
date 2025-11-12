@@ -6,7 +6,7 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:04:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 20:17:38 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/12 19:18:41 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init_player(t_player *player)
 	player->plane_y = 0.66;
 }
 
-static void	init_config(t_config *config)
+void	init_config(t_config *config)
 {
 	config->no_text_path = NULL;
 	config->so_text_path = NULL;
@@ -82,11 +82,7 @@ int	init_data(t_data *data)
 			&data->img.bits_per_pixel,
 			&data->img.line_length,
 			&data->img.endian);
-	data->split_content = NULL;
-	data->filename = NULL;
-	data->content = NULL;
-	init_player(&data->player);
-	init_config(&data->config);
+	data->check_minil = 1;
 	return (1);
 }
 

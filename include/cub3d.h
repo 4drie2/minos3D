@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/12 01:51:58 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/12 19:26:34 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,22 +89,6 @@ typedef struct s_config
 	t_colors	sky;
 }	t_config;
 
-
-typedef struct s_data
-{
-	void		*mlx;
-	void		*win;
-	t_image		img;
-	t_player	player;
-	int			**map;
-	t_keys		keys;
-	t_texture	textures[4];
-	t_config	config;
-	char		**split_content;
-	char		*filename;
-	char		*content;
-}	t_data;
-
 typedef struct s_ray
 {
 	double	dir_x;
@@ -127,6 +111,25 @@ typedef struct s_ray
 	int		tex_x;
 }	t_ray;
 
+typedef struct s_data
+{
+	void		*mlx;
+	void		*win;
+	t_image		img;
+	t_player	player;
+	int			**map;
+	t_keys		keys;
+	t_texture	textures[4];
+	t_config	config;
+	char		**split_content;
+	char		*filename;
+	char		*content;
+	t_ray		ray;
+	int			check_text;
+	int			check_minil;
+	int			check_err_pro_line;
+}	t_data;
+
 // Main
 void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void	ft_error(char *msg, t_data *data);
@@ -137,6 +140,7 @@ int		close_window(t_data *data);
 void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void	init_player(t_player *player);
 int		init_data(t_data *data);
+void	init_config(t_config *config);
 
 // Events
 int		key_release(int keycode, t_data *data);
@@ -151,6 +155,7 @@ int		render_frame(t_data *data);
 
 // Raycasting
 void	cast_rays(t_data *data);
+void	free_config_struc(t_config *config);
 
 /* raycasting_utils.c */
 void	calculate_wall_height(t_data *data, t_ray *ray);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 15:10:45 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/12 08:33:03 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/12 19:13:24 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,7 @@ int	load_texture(t_data *data, t_texture *texture, char *path)
 	return (1);
 }
 
-/*
-** init_textures : charge les 4 textures murales
-** Index 0 : Nord
-** Index 1 : Sud
-** Index 2 : Est
-** Index 3 : Ouest
-**
-** ATTENTION : Les paths seront fournis par le parsing
-** Pour l'instant, on met des paths temporaires (à adapter selon vos XPM)
-*/
+
 int	init_textures(t_data *data)
 {
 	int		i;
@@ -73,6 +64,7 @@ int	init_textures(t_data *data)
 		}
 		i++;
 	}
+	data->check_text = 1;
 	return (1);
 }
 
