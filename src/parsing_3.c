@@ -6,7 +6,7 @@
 /*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 20:22:33 by plerick           #+#    #+#             */
-/*   Updated: 2025/11/12 20:13:04 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/12 20:14:43 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,31 +40,31 @@ static void	find_player(t_data *data, int *player_count, int x, int y, char **li
 		return ((void)write(2, "Player spawns inside walls\n", 27));
 	if (c == 'N')
 	{
-		data->player.dir_x = -1.0;
-		data->player.dir_y = 0.0;
-		data->player.plane_x = 0.0;
-		data->player.plane_y = 0.66;
+		data->player.dir_x = 0.0;
+		data->player.dir_y = -1.0;
+		data->player.plane_x = 0.66;
+		data->player.plane_y = 0.0;
 	}
 	else if (c == 'S')
+	{
+		data->player.dir_x = 0.0;
+		data->player.dir_y = 1.0;
+		data->player.plane_x = -0.66;
+		data->player.plane_y = 0.0;
+	}
+	else if (c == 'E')
 	{
 		data->player.dir_x = 1.0;
 		data->player.dir_y = 0.0;
 		data->player.plane_x = 0.0;
-		data->player.plane_y = -0.66;
-	}
-	else if (c == 'E')
-	{
-		data->player.dir_x = 0.0;
-		data->player.dir_y = 1.0;
-		data->player.plane_x = 0.66;
-		data->player.plane_y = 0.0;
+		data->player.plane_y = 0.66;
 	}
 	else if (c == 'W')
 	{
-		data->player.dir_x = 0.0;
-		data->player.dir_y = -1.0;
-		data->player.plane_x = -0.66;
-		data->player.plane_y = 0.0;
+		data->player.dir_x = -1.0;
+		data->player.dir_y = 0.0;
+		data->player.plane_x = 0.0;
+		data->player.plane_y = -0.66;
 	}
 	data->player.pos_x = x;
 	lines[y][x] = '0';
