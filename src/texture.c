@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 15:10:45 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 20:21:37 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/12 08:33:03 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	free_textures(t_data *data)
 {
 	int	i;
 
+	if (!data->mlx)
+		return ;
 	i = 0;
 	while (i < 4)
 	{
