@@ -6,7 +6,7 @@
 /*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:03:43 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/12 09:54:54 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/12 20:06:28 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ void	calculate_wall_height(t_data *data, t_ray *ray)
 	else
 		ray->perp_wall_dist = (ray->map_y - data->player.pos_y
 				+ (1 - ray->step_y) / 2) / ray->dir_y;
+	if (ray->perp_wall_dist < 0.01)
+		ray->perp_wall_dist = 0.01;
 	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
+	if (ray->line_height > WIN_HEIGHT * 10)
+		ray->line_height = WIN_HEIGHT * 10;
 	ray->draw_start = -ray->line_height / 2 + WIN_HEIGHT / 2;
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
