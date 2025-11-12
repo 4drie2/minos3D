@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 20:09:09 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/12 01:51:58 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 #include "../minilibx-linux/mlx_int.h"
 #include "../libft/libft.h"
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
-# define MOVE_SPEED 0.1
-# define ROT_SPEED 0.05
+#define WIN_WIDTH 1920
+#define WIN_HEIGHT 1080
+#define MOVE_SPEED 0.1
+#define ROT_SPEED 0.05
 
 typedef struct s_image
 {
