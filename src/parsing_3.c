@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 20:22:33 by plerick           #+#    #+#             */
-/*   Updated: 2025/11/11 20:29:21 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/12 20:13:04 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ static void	find_player(t_data *data, int *player_count, int x, int y, char **li
 	c = lines[y][x];
 	if (!(c == 'N' || c == 'S' || c == 'E' || c == 'W'))
 		return ;
+	if (lines[y-1][x] == '1' && lines[y+1][x] == '1'
+		&& lines[y][x-1] == '1' && lines[y][x+1] == '1')
+		return ((void)write(2, "Player spawns inside walls\n", 27));
 	if (c == 'N')
 	{
 		data->player.dir_x = -1.0;
@@ -130,7 +133,7 @@ int	parse_map(char **lines, int start, t_data *data)
 	data->config.map_width = width;
 	y = 0;
 	player_count = 0;
-	while (y < height)	
+	while (y < height)
 	{
 		x = 0;
 		while (x < width && lines[y + start][x])
