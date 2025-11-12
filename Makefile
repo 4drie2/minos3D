@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+         #
+#    By: adrien <adrien@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/28 16:14:19 by abidaux           #+#    #+#              #
-#    Updated: 2025/11/11 20:18:53 by plerick          ###   ########.fr        #
+#    Updated: 2025/11/12 09:42:28 by adrien           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,12 @@ $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	@echo "$(YELLOW)Linking $(NAME)...$(RESET)"
 	$(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
 	@echo "$(GREEN)✓ $(NAME) créé avec succès !$(RESET)"
+
+# --- AJOUT DE LA CORRECTION ICI ---
+# Cette règle force make à attendre que $(LIBFT) et $(MLX) soient prêts
+# avant de compiler les fichiers objets, même en parallèle (-j).
+# Le '|' est un "prérequis d'ordre seul".
+$(OBJS): | $(LIBFT) $(MLX)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
