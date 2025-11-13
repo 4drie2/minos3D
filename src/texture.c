@@ -6,7 +6,7 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 15:10:45 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/12 19:13:24 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/13 17:14:58 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	load_texture(t_data *data, t_texture *texture, char *path)
 	}
 	return (1);
 }
-
 
 int	init_textures(t_data *data)
 {

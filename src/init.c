@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:04:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/13 10:40:52 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/13 17:24:26 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	init_config(t_config *config)
 	config->sky.b = -1;
 	config->map_height = -1;
 	config->map_width = -1;
+	config->player_count = 0;
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:00:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/12 19:27:11 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/13 17:19:36 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,22 @@ static int	process_lines(char **split_content, t_data *data)
 	int		i;
 	char	*trimmed;
 
-	i = 0;
-	while (split_content[i])
+	i = -1;
+	while (split_content[++i])
 	{
-		trimmed = ft_strdup(split_content[i]);	
+		trimmed = ft_strdup(split_content[i]);
 		if (is_map_start(trimmed))
 		{
 			free(trimmed);
-			break;
+			break ;
 		}
 		if (!(parse_line(trimmed, &data->config)))
 		{
 			free(trimmed);
 			data->check_err_pro_line = 1;
-			return(free_config_struc(&data->config), write(2, "error in parsing\n", 17), 0);
+			return (free_config_struc(&data->config), write(2, "par\n", 4), 0);
 		}
 		free(trimmed);
-		i++;
 	}
 	if (!all_elements_set(&data->config))
 		return (write(2, "Missing config elem\n", 20), 0);
@@ -54,13 +53,14 @@ static int	process_lines(char **split_content, t_data *data)
 static int	check_extension(char *filename)
 {
 	char	*dot;
+
 	dot = ft_strrchr(filename, '.');
 	if (!dot || ft_strcmp(dot, ".cub") != 0)
 		return (0);
 	return (1);
 }
 
-static char *read_file(char *filename)
+static char	*read_file(char *filename)
 {
 	int		fd;
 	char	*line;

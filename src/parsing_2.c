@@ -6,10 +6,9 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 20:22:18 by plerick           #+#    #+#             */
-/*   Updated: 2025/11/12 15:58:36 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/13 17:14:02 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/cub3d.h"
 
@@ -107,7 +106,8 @@ int	parse_line(char *line, t_config *config)
 	else if (ft_strcmp(split[0], "C") == 0 && config->sky.r == -1)
 		parse_color(split[1], &config->sky, &err);
 	else
-		return (ft_free_array(split), write(2, "Invalid or duplicate config", 27), 0);
+		return (ft_free_array(split),
+			write(2, "Invalid or duplicate config", 27), 0);
 	ft_free_array(split);
 	return (err);
 }

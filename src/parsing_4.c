@@ -6,10 +6,9 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 20:22:36 by plerick           #+#    #+#             */
-/*   Updated: 2025/11/11 20:22:36 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/13 17:14:39 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/cub3d.h"
 
@@ -47,4 +46,3 @@ void	flood_fill(char **map, int x, int y, int *ret)
 	flood_fill(map, x - 1, y, ret);
 	flood_fill(map, x + 1, y, ret);
 }
-

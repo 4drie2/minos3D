@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/13 10:47:31 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/13 17:25:12 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_config
 	int			map_height;
 	t_colors		floor;
 	t_colors		sky;
+	int			player_count;
 }	t_config;
 
 typedef struct s_ray
@@ -177,6 +178,7 @@ int		is_valid_map_char(char c);
 char	**duplicate_map(char **map, int height, int start);
 void	flood_fill(char **map, int x, int y, int *ret);
 void	check_edges(char **copy, t_config *config);
+void	find_player(t_data *data, int x, int y, char **lines);
 
 /* Player */
 void	rotate_player(t_player *player, double angle);

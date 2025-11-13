@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 20:22:33 by plerick           #+#    #+#             */
-/*   Updated: 2025/11/12 20:14:43 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/13 17:27:26 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/cub3d.h"
 
@@ -28,7 +27,7 @@ static int	validate_map_closed(t_data *data, char **lines, int start)
 	return (1);
 }
 
-static void	find_player(t_data *data, int *player_count, int x, int y, char **lines)
+void	find_player(t_data *data, int x, int y, char **lines)
 {
 	char	c;
 
@@ -68,7 +67,7 @@ static void	find_player(t_data *data, int *player_count, int x, int y, char **li
 	}
 	data->player.pos_x = x;
 	lines[y][x] = '0';
-	(*player_count)++;
+	data->config.player_count++;
 }
 
 #include "cub3d.h"
@@ -116,7 +115,6 @@ int	parse_map(char **lines, int start, t_data *data)
 	int	height;
 	int	width;
 	int	y;
-	int	player_count;
 	int	x;
 
 	height = 0;
@@ -132,20 +130,19 @@ int	parse_map(char **lines, int start, t_data *data)
 	data->config.map_height = height;
 	data->config.map_width = width;
 	y = 0;
-	player_count = 0;
 	while (y < height)
 	{
 		x = 0;
 		while (x < width && lines[y + start][x])
 		{
-			find_player(data, &player_count, x, start + y, lines);
+			find_player(data, x, start + y, lines);
 			if (data->player.pos_x != -1 && data->player.pos_y == -1)
 				data->player.pos_y = y;
 			x++;
 		}
 		y++;
 	}
-	if (player_count != 1)
+	if (data->config.player_count != 1)
 		return (write(2, "Invalid player count\n", 21), 0);
 	if (!validate_map_closed(data, lines, start))
 		return (write(2, "Invalid map\n", 12), 0);
