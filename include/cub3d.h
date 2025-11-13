@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/12 19:26:34 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/13 10:28:14 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ typedef struct s_config
 	char		*ea_text_path;
 	int			map_width;
 	int			map_height;
-	t_colors	floor;
-	t_colors	sky;
+	t_colors		floor;
+	t_colors		sky;
 }	t_config;
 
 typedef struct s_ray

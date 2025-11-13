@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_draw.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:02:30 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 04:31:42 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/13 10:30:15 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@
 static void	draw_ceiling(t_data *data, t_ray *ray, int x)
 {
 	int	y;
+	int	color;
 
 	y = 0;
+	color = (data->config.sky.r << 16) | (data->config.sky.g << 8)
+		| data->config.sky.b;
 	while (y < ray->draw_start)
 	{
-		my_mlx_pixel_put(&data->img, x, y, 0x87CEEB); //changer la couleur par ce qu'il va etre donné dans le .cub
+		my_mlx_pixel_put(&data->img, x, y, color);
 		y++;
 	}
 }
@@ -61,11 +64,14 @@ static void	draw_wall(t_data *data, t_ray *ray, int x)
 static void	draw_floor(t_data *data, t_ray *ray, int x)
 {
 	int	y;
+	int	color;
 
+	color = (data->config.floor.r << 16) | (data->config.floor.g << 8)
+		| data->config.floor.b;
 	y = ray->draw_end + 1;
 	while (y < WIN_HEIGHT)
 	{
-		my_mlx_pixel_put(&data->img, x, y, 0x404040); //changer la couleur par ce qu'il va etre donné dans le .cub
+		my_mlx_pixel_put(&data->img, x, y, color);
 		y++;
 	}
 }
