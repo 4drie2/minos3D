@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 20:44:07 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 04:31:49 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/13 10:46:34 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	key_press(int keycode, t_data *data)
 		data->keys.left = 1;
 	else if (keycode == XK_Right)
 		data->keys.right = 1;
+	else if (keycode == XK_Shift_L)
+		data->keys.shift = 1;
 	return (0);
 }
 
@@ -51,6 +53,8 @@ int	key_release(int keycode, t_data *data)
 		data->keys.left = 0;
 	else if (keycode == XK_Right)
 		data->keys.right = 0;
+	else if (keycode == XK_Shift_L)
+		data->keys.shift = 0;
 	return (0);
 }
 
@@ -59,6 +63,10 @@ int	key_release(int keycode, t_data *data)
 */
 void	update_movement(t_data *data)
 {
+	if (data->keys.shift)
+		data->move_speed = MOVE_SPEED * 2;
+	else
+		data->move_speed = MOVE_SPEED;
 	if (data->keys.w)
 		move_forward(data);
 	if (data->keys.s)

@@ -6,7 +6,7 @@
 /*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/13 10:28:14 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/13 10:47:31 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_keys
 	int	d;
 	int	left;
 	int	right;
+	int	shift;
 }	t_keys;
 
 typedef struct t_colors
@@ -128,6 +129,7 @@ typedef struct s_data
 	int			check_text;
 	int			check_minil;
 	int			check_err_pro_line;
+	double		move_speed;
 }	t_data;
 
 // Main

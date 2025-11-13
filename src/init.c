@@ -6,7 +6,7 @@
 /*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:04:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/13 10:28:17 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/13 10:40:52 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	init_data(t_data *data)
 			&data->img.line_length,
 			&data->img.endian);
 	data->check_minil = 1;
+	data->move_speed = MOVE_SPEED;
 	return (1);
 }
 
