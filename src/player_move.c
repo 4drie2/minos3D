@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:00:00 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 04:31:45 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/13 10:31:58 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	move_right(t_data *data)
 	double	move_y;
 
 	move_speed = 0.05;
-	move_x = data->player.dir_y * move_speed;
-	move_y = -data->player.dir_x * move_speed;
+	move_x = -data->player.dir_y * move_speed;
+	move_y = data->player.dir_x * move_speed;
 	move_player(data, move_x, move_y);
 }
 
@@ -55,8 +55,8 @@ void	move_left(t_data *data)
 	double	move_y;
 
 	move_speed = 0.05;
-	move_x = -data->player.dir_y * move_speed;
-	move_y = data->player.dir_x * move_speed;
+	move_x = data->player.dir_y * move_speed;
+	move_y = -data->player.dir_x * move_speed;
 	move_player(data, move_x, move_y);
 }
 
@@ -65,7 +65,7 @@ void	rotate_left(t_data *data)
 	double	rot_speed;
 
 	rot_speed = 0.05;
-	rotate_player(&data->player, rot_speed);
+	rotate_player(&data->player, -rot_speed);
 }
 
 void	rotate_right(t_data *data)
@@ -73,5 +73,5 @@ void	rotate_right(t_data *data)
 	double	rot_speed;
 
 	rot_speed = 0.05;
-	rotate_player(&data->player, -rot_speed);
+	rotate_player(&data->player, rot_speed);
 }

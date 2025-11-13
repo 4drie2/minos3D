@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_rotation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:08:34 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/11 04:31:44 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/13 10:31:58 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	handle_rotation(t_data *data)
 
 	rot_speed = 0.05;
 	if (data->keys.left)
-		rotate_player(&data->player, rot_speed);
-	if (data->keys.right)
 		rotate_player(&data->player, -rot_speed);
+	if (data->keys.right)
+		rotate_player(&data->player, rot_speed);
 }
 
 void	handle_movement(t_data *data)
@@ -52,14 +52,14 @@ void	handle_strafe_movement(t_data *data, double move_speed)
 
 	if (data->keys.a)
 	{
-		move_x = data->player.dir_y * move_speed;
-		move_y = -data->player.dir_x * move_speed;
+		move_x = -data->player.dir_y * move_speed;
+		move_y = data->player.dir_x * move_speed;
 		move_player(data, move_x, move_y);
 	}
 	if (data->keys.d)
 	{
-		move_x = -data->player.dir_y * move_speed;
-		move_y = data->player.dir_x * move_speed;
+		move_x = data->player.dir_y * move_speed;
+		move_y = -data->player.dir_x * move_speed;
 		move_player(data, move_x, move_y);
 	}
 }
