@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 16:17:40 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/12 19:27:02 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/14 01:28:48 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,13 @@ int	main(int argc, char *argv[])
 		ft_error("Initialization failed", &data);
 	if (!init_textures(&data))
 		ft_error("Failed to load textures", &data);
+	data.mouse.last_x = 0;
+	data.mouse.last_y = 0;
+	data.mouse.first_move = 1;
 	mlx_hook(data.win, 17, 0, close_window, &data);
 	mlx_hook(data.win, KeyPress, KeyPressMask, key_press, &data);
 	mlx_hook(data.win, KeyRelease, KeyReleaseMask, key_release, &data);
+	mlx_hook(data.win, MotionNotify, PointerMotionMask, mouse_move, &data);
 	mlx_loop_hook(data.mlx, render_frame, &data);
 	mlx_loop(data.mlx);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/14 01:07:08 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/14 01:28:56 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 #define WIN_HEIGHT 800
 #define MOVE_SPEED 0.03
 #define ROT_SPEED 0.005
+#define MOUSE_SENSITIVITY 0.02
 
 typedef struct s_image
 {
@@ -69,6 +70,13 @@ typedef struct s_keys
 	int	right;
 	int	shift;
 }	t_keys;
+
+typedef struct s_mouse
+{
+	int	last_x;
+	int	last_y;
+	int	first_move;
+}	t_mouse;
 
 typedef struct t_colors
 {
@@ -121,6 +129,7 @@ typedef struct s_data
 	t_player	player;
 	int			**map;
 	t_keys		keys;
+	t_mouse		mouse;
 	t_texture	textures[4];
 	t_config	config;
 	char		**split_content;
@@ -149,6 +158,7 @@ void	init_config(t_config *config);
 int		key_release(int keycode, t_data *data);
 int		key_press(int keycode, t_data *data);
 void	update_movement(t_data *data);
+int		mouse_move(int x, int y, t_data *data);
 
 /* cleanup.c */
 void	cleanup(t_data *data);
