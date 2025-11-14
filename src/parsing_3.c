@@ -6,7 +6,7 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 20:22:33 by plerick           #+#    #+#             */
-/*   Updated: 2025/11/14 13:56:58 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/14 14:09:00 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ static void	map_to_int(t_data *data, char **lines, int start)
 		if (!data->map[y])
 			ft_error("Malloc failed for map_int[y]", data);
 		len = ft_strlen(lines[start + y]);
-		x = 0;
-		while (x < data->config.map_width)
+		x = -1;
+		while (++x < data->config.map_width)
 		{
-			if (x++ < len)
+			if (x < len)
 				data->map[y][x] = char_to_int(lines[start + y][x]);
 			else
 				data->map[y][x] = 0;
