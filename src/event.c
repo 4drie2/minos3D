@@ -6,7 +6,7 @@
 /*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 20:44:07 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/14 07:32:57 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/14 07:42:54 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	mouse_move(int x, int y, t_data *data)
 	double	rot_angle;
 
 	(void)y;
+	if (MOUSE_SENSITIVITY <= 0)
+		return (0);
 	if (data->mouse.first_move)
 	{
 		data->mouse.last_x = x;
