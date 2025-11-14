@@ -6,7 +6,7 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/14 13:00:21 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/14 13:54:48 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ typedef struct t_colors
 	int	b;
 }	t_colors;
 
-
 typedef struct s_config
 {
 	char		*no_text_path;
@@ -95,8 +94,8 @@ typedef struct s_config
 	char		*ea_text_path;
 	int			map_width;
 	int			map_height;
-	t_colors		floor;
-	t_colors		sky;
+	t_colors	floor;
+	t_colors	sky;
 	int			player_count;
 }	t_config;
 
@@ -140,6 +139,7 @@ typedef struct s_data
 	int			check_text;
 	int			check_minil;
 	int			check_err_pro_line;
+	int			chec_map_used;
 	double		move_speed;
 }	t_data;
 
@@ -194,6 +194,7 @@ void	char_play_n(t_data *data);
 void	char_play_s(t_data *data);
 void	char_play_e(t_data *data);
 void	char_play_w(t_data *data);
+void	set_heightandwithd(char **lines, int start, t_data *data);
 
 /* Player */
 void	rotate_player(t_player *player, double angle);

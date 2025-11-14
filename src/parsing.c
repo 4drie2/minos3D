@@ -6,7 +6,7 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:00:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/13 17:19:36 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/14 13:49:22 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,11 @@ static char	*read_file(char *filename)
 	if (fd < 0)
 		return (NULL);
 	content = ft_strdup("");
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		content = ft_strjoin_free(content, line);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (content);
@@ -87,10 +89,12 @@ int	parse_file(t_data *data, char *filename)
 	split_content = NULL;
 	if (!check_extension(filename))
 		return (write(2, "error, bad extension\n", 21), 0);
-	if ((content = read_file(filename)) == NULL)
+	content = read_file(filename);
+	if (content == NULL)
 		return (write(2, "error, bad read\n", 16), 0);
 	data->content = content;
-	if (!(split_content = ft_split(content, '\n')))
+	split_content = ft_split(content, '\n');
+	if (!split_content)
 		return (write(2, "bad split\n", 10), 0);
 	data->split_content = split_content;
 	free(content);

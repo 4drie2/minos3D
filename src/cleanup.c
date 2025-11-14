@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:04:24 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/12 20:08:27 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/14 13:58:54 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ void	cleanup(t_data *data)
 	}
 	if (data->check_err_pro_line == 0)
 		free_config_struc(&data->config);
-	cleanup_map(data);
+	if (data->chec_map_used == 1)
+		cleanup_map(data);
 }

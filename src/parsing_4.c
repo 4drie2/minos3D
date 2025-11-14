@@ -6,11 +6,31 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 20:22:36 by plerick           #+#    #+#             */
-/*   Updated: 2025/11/13 17:14:39 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/14 13:23:31 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	set_heightandwithd(char **lines, int start, t_data *data)
+{
+	int	height;
+	int	width;
+	int	y;
+
+	height = 0;
+	width = 0;
+	y = start;
+	while (lines[y])
+	{
+		if (ft_strlen(lines[y]) > (size_t)width)
+			width = ft_strlen(lines[y]);
+		height++;
+		y++;
+	}
+	data->config.map_height = height;
+	data->config.map_width = width;
+}
 
 char	**duplicate_map(char **map, int height, int start)
 {

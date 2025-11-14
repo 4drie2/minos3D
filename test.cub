@@ -1,10 +1,10 @@
-NO ./textures-stylemineraft/north.xpm
+NO ./textures-fullrobin/east.xpm
 SO ./textures-stylemineraft/south.xpm
 WE ./textures-stylemineraft/west.xpm
-F 220,100,0
 EA ./textures-stylemineraft/east.xpm
 
 
+F 220,100,0
 C 225,30,0
 
         1111111111111111111111111

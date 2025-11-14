@@ -6,7 +6,7 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 20:22:33 by plerick           #+#    #+#             */
-/*   Updated: 2025/11/14 13:02:27 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/14 13:56:58 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static int	validate_map_closed(t_data *data, char **lines, int start)
 	int		ret;
 
 	ret = 0;
-	if ((copy = duplicate_map(lines, data->config.map_height, start)) == NULL)
+	copy = duplicate_map(lines, data->config.map_height, start);
+	if (copy == NULL)
 		return (write(2, "bad copy of map\n", 16), 0);
 	flood_fill(copy, (int)data->player.pos_x, (int)data->player.pos_y, &ret);
 	ft_free_array(copy);
@@ -78,40 +79,27 @@ static void	map_to_int(t_data *data, char **lines, int start)
 		x = 0;
 		while (x < data->config.map_width)
 		{
-			if (x < len)
+			if (x++ < len)
 				data->map[y][x] = char_to_int(lines[start + y][x]);
 			else
 				data->map[y][x] = 0;
-			x++;
 		}
 		y++;
 	}
+	data->chec_map_used = 1;
 }
 
 int	parse_map(char **lines, int start, t_data *data)
 {
-	int	height;
-	int	width;
 	int	y;
 	int	x;
 
-	height = 0;
-	width = 0;
-	y = start;
-	while (lines[y])
-	{
-		if (ft_strlen(lines[y]) > (size_t)width)
-			width = ft_strlen(lines[y]);
-		height++;
-		y++;
-	}
-	data->config.map_height = height;
-	data->config.map_width = width;
+	set_heightandwithd(lines, start, data);
 	y = 0;
-	while (y < height)
+	while (y < data->config.map_height)
 	{
 		x = 0;
-		while (x < width && lines[y + start][x])
+		while (x < data->config.map_width && lines[y + start][x])
 		{
 			find_player(data, x, start + y, lines);
 			if (data->player.pos_x != -1 && data->player.pos_y == -1)
