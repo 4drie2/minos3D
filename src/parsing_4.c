@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 20:22:36 by plerick           #+#    #+#             */
-/*   Updated: 2025/11/14 13:23:31 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/14 14:52:15 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,24 @@
 
 void	set_heightandwithd(char **lines, int start, t_data *data)
 {
-	int	height;
-	int	width;
-	int	y;
+	int		height;
+	int		width;
+	int		y;
+	size_t	len;
 
 	height = 0;
 	width = 0;
 	y = start;
 	while (lines[y])
 	{
-		if (ft_strlen(lines[y]) > (size_t)width)
-			width = ft_strlen(lines[y]);
+		len = ft_strlen(lines[y]);
+		if (len == 0 && lines[y + 1])
+		{
+			write(2, "Empty line in map\n", 18);
+			ft_error("Invalid map structure", data);
+		}
+		if (len > (size_t)width)
+			width = len;
 		height++;
 		y++;
 	}

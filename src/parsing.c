@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:00:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/14 13:49:22 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/14 14:57:49 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	parse_file(t_data *data, char *filename)
 	content = read_file(filename);
 	if (content == NULL)
 		return (write(2, "error, bad read\n", 16), 0);
+	if (!check_empty_lines_in_map(content))
+		return (free(content), 0);
 	data->content = content;
 	split_content = ft_split(content, '\n');
 	if (!split_content)

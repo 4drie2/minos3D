@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 20:22:33 by plerick           #+#    #+#             */
-/*   Updated: 2025/11/14 14:26:19 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/14 15:00:04 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int	parse_map(char **lines, int start, t_data *data)
 	int	x;
 
 	set_heightandwithd(lines, start, data);
+	if (!validate_map_chars(lines, start, data->config.map_height))
+		return (0);
 	y = 0;
 	while (y < data->config.map_height)
 	{
