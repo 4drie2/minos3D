@@ -6,7 +6,7 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 20:22:33 by plerick           #+#    #+#             */
-/*   Updated: 2025/11/13 17:27:26 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/14 13:02:27 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,43 +34,21 @@ void	find_player(t_data *data, int x, int y, char **lines)
 	c = lines[y][x];
 	if (!(c == 'N' || c == 'S' || c == 'E' || c == 'W'))
 		return ;
-	if (lines[y-1][x] == '1' && lines[y+1][x] == '1'
-		&& lines[y][x-1] == '1' && lines[y][x+1] == '1')
+	if (lines[y - 1][x] == '1' && lines[y + 1][x] == '1'
+		&& lines[y][x - 1] == '1' && lines[y][x + 1] == '1')
 		return ((void)write(2, "Player spawns inside walls\n", 27));
 	if (c == 'N')
-	{
-		data->player.dir_x = 0.0;
-		data->player.dir_y = -1.0;
-		data->player.plane_x = 0.66;
-		data->player.plane_y = 0.0;
-	}
+		char_play_n(data);
 	else if (c == 'S')
-	{
-		data->player.dir_x = 0.0;
-		data->player.dir_y = 1.0;
-		data->player.plane_x = -0.66;
-		data->player.plane_y = 0.0;
-	}
+		char_play_s(data);
 	else if (c == 'E')
-	{
-		data->player.dir_x = 1.0;
-		data->player.dir_y = 0.0;
-		data->player.plane_x = 0.0;
-		data->player.plane_y = 0.66;
-	}
+		char_play_e(data);
 	else if (c == 'W')
-	{
-		data->player.dir_x = -1.0;
-		data->player.dir_y = 0.0;
-		data->player.plane_x = 0.0;
-		data->player.plane_y = -0.66;
-	}
+		char_play_w(data);
 	data->player.pos_x = x;
 	lines[y][x] = '0';
 	data->config.player_count++;
 }
-
-#include "cub3d.h"
 
 static int	char_to_int(char c)
 {

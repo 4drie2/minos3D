@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/14 07:44:32 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/14 13:00:21 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,10 @@ char	**duplicate_map(char **map, int height, int start);
 void	flood_fill(char **map, int x, int y, int *ret);
 void	check_edges(char **copy, t_config *config);
 void	find_player(t_data *data, int x, int y, char **lines);
+void	char_play_n(t_data *data);
+void	char_play_s(t_data *data);
+void	char_play_e(t_data *data);
+void	char_play_w(t_data *data);
 
 /* Player */
 void	rotate_player(t_player *player, double angle);
