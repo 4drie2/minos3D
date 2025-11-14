@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 20:44:07 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/14 01:28:48 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/14 07:32:57 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	mouse_move(int x, int y, t_data *data)
 	double	rot_angle;
 
 	(void)y;
-	/* Ignorer le premier mouvement pour initialiser last_x */
 	if (data->mouse.first_move)
 	{
 		data->mouse.last_x = x;
@@ -30,15 +29,12 @@ int	mouse_move(int x, int y, t_data *data)
 		data->mouse.first_move = 0;
 		return (0);
 	}
-	/* Calculer le déplacement depuis la dernière position */
 	delta_x = x - data->mouse.last_x;
-	/* Appliquer la rotation */
 	if (delta_x != 0)
 	{
 		rot_angle = delta_x * MOUSE_SENSITIVITY;
 		rotate_player(&data->player, rot_angle);
 	}
-	/* Sauvegarder la position actuelle */
 	data->mouse.last_x = x;
 	data->mouse.last_y = y;
 	return (0);
