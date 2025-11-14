@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:00:00 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/13 10:48:23 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/14 01:09:36 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,4 @@ void	move_left(t_data *data)
 	move_x = data->player.dir_y * (0.5 * data->move_speed);
 	move_y = -data->player.dir_x * (0.5 * data->move_speed);
 	move_player(data, move_x, move_y);
-}
-
-void	rotate_left(t_data *data)
-{
-	double	rot_speed;
-
-	rot_speed = 0.05;
-	rotate_player(&data->player, -rot_speed);
-}
-
-void	rotate_right(t_data *data)
-{
-	double	rot_speed;
-
-	rot_speed = 0.05;
-	rotate_player(&data->player, rot_speed);
 }

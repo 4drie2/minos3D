@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_rotation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:08:34 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/13 10:31:58 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/14 01:09:45 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,20 @@ void	handle_strafe_movement(t_data *data, double move_speed)
 		move_y = -data->player.dir_x * move_speed;
 		move_player(data, move_x, move_y);
 	}
+}
+
+void	rotate_left(t_data *data)
+{
+	double	rot_speed;
+
+	rot_speed = 0.05;
+	rotate_player(&data->player, -rot_speed);
+}
+
+void	rotate_right(t_data *data)
+{
+	double	rot_speed;
+
+	rot_speed = 0.05;
+	rotate_player(&data->player, rot_speed);
 }
