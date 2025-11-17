@@ -66,7 +66,7 @@ void	char_play_w(t_data *data)
 	data->player.plane_y = -0.66;
 }
 
-int	check_empty_lines_in_map(char **lines, int start, t_data *data)
+int	check_empty_lines_in_map(char **lines, int start, char *content)
 {
 	int	i;
 	int	j;
@@ -74,29 +74,27 @@ int	check_empty_lines_in_map(char **lines, int start, t_data *data)
 
 	i = 0;
 	j = 0;
-	while (data->content[j] && i < start)
+	while (content[j] && i < start)
 	{
-		while (data->content[j] == '\n')
+		while (content[j] == '\n')
 			j++;
-		while (data->content[j] && data->content[j] != '\n')
+		while (content[j] && content[j] != '\n')
 			j++;
-		if (data->content[j] == '\n')
+		if (content[j] == '\n')
 			j++;
 		i++;
 	}
-	i = 0;
 	while (lines[i])
 	{
-		if (data->content[j] == '\n')
+		if (content[j] == '\n')
 			return (0);
 		k = 0;
-		while (data->content[j + k] && data->content[j + k] != '\n')
+		while (content[j + k] && content[j + k] != '\n')
 			k++;
-		if (ft_strncmp(lines[i], data->content + j, k) != 0
-			|| lines[i][k] != '\0')
+		if (ft_strncmp(lines[i], content + j, k - 1) != 0 || lines[i][k] != '\0')
 			return (0);
 		j += k;
-		if (data->content[j] == '\n')
+		if (content[j] == '\n')
 			j++;
 		i++;
 	}
