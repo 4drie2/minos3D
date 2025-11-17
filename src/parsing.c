@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:00:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/14 14:57:49 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/17 18:37:01 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static int	process_lines(char **split_content, t_data *data)
 	}
 	if (!all_elements_set(&data->config))
 		return (write(2, "Missing config elem\n", 20), 0);
+	if (check_empty_lines_in_map(split_content, i, data))
+		return (write(2, "empty line in map\n", 18), 0);
 	if (!parse_map(split_content, i, data))
 		return (write(2, "bad parse of map\n", 17), 0);
 	return (1);
@@ -92,14 +94,14 @@ int	parse_file(t_data *data, char *filename)
 	content = read_file(filename);
 	if (content == NULL)
 		return (write(2, "error, bad read\n", 16), 0);
-	if (!check_empty_lines_in_map(content))
-		return (free(content), 0);
+	// if (!check_empty_lines_in_map(content))
+		// return (free(content), 0);
 	data->content = content;
 	split_content = ft_split(content, '\n');
 	if (!split_content)
 		return (write(2, "bad split\n", 10), 0);
 	data->split_content = split_content;
-	free(content);
+	// free(content);
 	if (!(process_lines(split_content, data)))
 		return (ft_free_array(split_content), 0);
 	ft_free_array(split_content);

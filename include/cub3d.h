@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/14 15:00:04 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/17 18:28:02 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,9 @@ void	char_play_s(t_data *data);
 void	char_play_e(t_data *data);
 void	char_play_w(t_data *data);
 void	set_heightandwithd(char **lines, int start, t_data *data);
-int		check_empty_lines_in_map(char *content);
+int		check_empty_lines_in_map(char **lines, int start, t_data *data);
+int		is_map_start_spe_space(char *content, int i, int j);
+int		space_in_map(char *content, int i);
 
 /* Player */
 void	rotate_player(t_player *player, double angle);

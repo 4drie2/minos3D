@@ -6,7 +6,7 @@
 /*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 20:22:18 by plerick           #+#    #+#             */
-/*   Updated: 2025/11/13 17:14:02 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/17 18:30:29 by plerick          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	parse_line(char *line, t_config *config)
 		parse_color(split[1], &config->sky, &err);
 	else
 		return (ft_free_array(split),
-			write(2, "Invalid or duplicate config", 27), 0);
+			write(2, "Invalid or duplicate config\n", 28), 0);
 	ft_free_array(split);
 	return (err);
 }
