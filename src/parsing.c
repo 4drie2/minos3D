@@ -45,7 +45,7 @@ static int	process_lines(char **split_content, t_data *data)
 	}
 	if (!all_elements_set(&data->config))
 		return (write(2, "Missing config elem\n", 20), 0);
-	if (check_empty_lines_in_map(split_content, i, data))
+	if (!check_empty_lines_in_map(split_content, i, data))
 		return (write(2, "empty line in map\n", 18), 0);
 	if (!parse_map(split_content, i, data))
 		return (write(2, "bad parse of map\n", 17), 0);
