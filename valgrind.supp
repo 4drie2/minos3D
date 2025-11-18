@@ -1,0 +1,90 @@
+{
+   <mlx_init_leak>
+   Memcheck:Leak
+   ...
+   fun:mlx_init
+}
+
+{
+   <mlx_new_window_leak>
+   Memcheck:Leak
+   ...
+   fun:mlx_new_window
+}
+
+{
+   <mlx_new_image_leak>
+   Memcheck:Leak
+   ...
+   fun:mlx_new_image
+}
+
+{
+   <mlx_xpm_file_to_image_leak>
+   Memcheck:Leak
+   ...
+   fun:mlx_xpm_file_to_image
+}
+
+{
+   <X11_leak>
+   Memcheck:Leak
+   ...
+   obj:*/libX11.so*
+}
+
+{
+   <X11_XOpenDisplay>
+   Memcheck:Leak
+   ...
+   fun:XOpenDisplay
+}
+
+{
+   <X11_XCreateGC>
+   Memcheck:Leak
+   ...
+   fun:XCreateGC
+}
+
+{
+   <Xext_leak>
+   Memcheck:Leak
+   ...
+   obj:*/libXext.so*
+}
+
+{
+   <xcb_leak>
+   Memcheck:Leak
+   ...
+   obj:*/libxcb.so*
+}
+
+{
+   <Xcursor_leak>
+   Memcheck:Leak
+   ...
+   obj:*/libXcursor.so*
+}
+
+{
+   <Xrender_leak>
+   Memcheck:Leak
+   ...
+   obj:*/libXrender.so*
+}
+
+{
+   <dl_loader_leak>
+   Memcheck:Leak
+   ...
+   fun:_dl_*
+}
+
+{
+   <dlopen_leak>
+   Memcheck:Leak
+   ...
+   fun:dlopen*
+}
