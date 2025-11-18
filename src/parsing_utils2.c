@@ -66,12 +66,14 @@ void	char_play_w(t_data *data)
 	data->player.plane_y = -0.66;
 }
 
-int	check_empty_lines_in_map(char **lines, int start, char *content)
+int	check_empty_lines_in_map(char **lines, int start, t_data *data)
 {
-	int	i;
-	int	j;
-	int	k;
+	int		i;
+	int		j;
+	int		k;
+	char	*content;
 
+	content = data->content;
 	i = 0;
 	j = 0;
 	while (content[j] && i < start)
