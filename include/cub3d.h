@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/17 18:28:02 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/18 17:13:11 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 #define WIN_HEIGHT 800
 #define MOVE_SPEED 0.03
 #define ROT_SPEED 0.005
-#define MOUSE_SENSITIVITY 0.02
+#define MOUSE_SENSITIVITY 0.002
 // #define MOUSE_SENSITIVITY 0.0
 
 typedef struct s_image

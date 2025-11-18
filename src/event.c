@@ -6,7 +6,7 @@
 /*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 20:44:07 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/14 13:28:17 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/18 17:11:47 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,26 @@
 */
 int	mouse_move(int x, int y, t_data *data)
 {
-	int		delta_x;
-	double	rot_angle;
+	int	center_x;
+	int	delta_x;
 
 	(void)y;
 	if (MOUSE_SENSITIVITY <= 0)
 		return (0);
+
+	center_x = WIN_WIDTH / 2;
 	if (data->mouse.first_move)
 	{
-		data->mouse.last_x = x;
-		data->mouse.last_y = y;
 		data->mouse.first_move = 0;
+		mlx_mouse_move(data->mlx, data->win, center_x, WIN_HEIGHT / 2);
 		return (0);
 	}
-	delta_x = x - data->mouse.last_x;
-	if (delta_x != 0)
-	{
-		rot_angle = delta_x * MOUSE_SENSITIVITY;
-		rotate_player(&data->player, rot_angle);
-	}
-	data->mouse.last_x = x;
-	data->mouse.last_y = y;
+	delta_x = x - center_x;
+	if (delta_x == 0)
+		return (0);
+	rotate_player(&data->player, delta_x * MOUSE_SENSITIVITY);
+	mlx_mouse_move(data->mlx, data->win, center_x, WIN_HEIGHT / 2);
+
 	return (0);
 }
 

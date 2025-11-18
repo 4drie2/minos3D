@@ -6,7 +6,7 @@
 /*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:02:30 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/14 13:25:42 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/18 17:10:43 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void	draw_wall(t_data *data, t_ray *ray, int x)
 		my_mlx_pixel_put(&data->img, x, y, color);
 		y++;
 	}
-	mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 }
 
 /*
