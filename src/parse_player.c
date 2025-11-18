@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils2.c                                   :+:      :+:    :+:   */
+/*   parse_player.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 12:56:13 by plerick           #+#    #+#             */
-/*   Updated: 2025/11/18 16:42:41 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/18 19:14:24 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,56 +24,18 @@ int	space_in_map(char *content, int i)
 			while (content[j] && (content[j] == ' ' || content[j] == '\t'))
 				j++;
 			if (content[j] && content[j] != '\n')
-			{
-				printf("char : %c%c%c%c%c%c", content[j], content[j+1], content[j+2], content[j+3], content[j+4], content[j+5]);
 				return (write(2, "Empty line in map\n", 18), 0);
-			}
 		}
 		i++;
 	}
 	return (1);
 }
 
-void	char_play_n(t_data *data)
+static int	skip_to_map_start(char *content, int start)
 {
-	data->player.dir_x = 0.0;
-	data->player.dir_y = -1.0;
-	data->player.plane_x = 0.66;
-	data->player.plane_y = 0.0;
-}
+	int	i;
+	int	j;
 
-void	char_play_s(t_data *data)
-{
-	data->player.dir_x = 0.0;
-	data->player.dir_y = 1.0;
-	data->player.plane_x = -0.66;
-	data->player.plane_y = 0.0;
-}
-
-void	char_play_e(t_data *data)
-{
-	data->player.dir_x = 1.0;
-	data->player.dir_y = 0.0;
-	data->player.plane_x = 0.0;
-	data->player.plane_y = 0.66;
-}
-
-void	char_play_w(t_data *data)
-{
-	data->player.dir_x = -1.0;
-	data->player.dir_y = 0.0;
-	data->player.plane_x = 0.0;
-	data->player.plane_y = -0.66;
-}
-
-int	check_empty_lines_in_map(char **lines, int start, t_data *data)
-{
-	int		i;
-	int		j;
-	int		k;
-	char	*content;
-
-	content = data->content;
 	i = 0;
 	j = 0;
 	while (content[j] && i < start)
@@ -88,15 +50,41 @@ int	check_empty_lines_in_map(char **lines, int start, t_data *data)
 	}
 	while (content[j] == '\n')
 		j++;
+	return (j);
+}
+
+static int	validate_map_line(char **lines, char *content, int i, int j)
+{
+	int	k;
+
+	if (content[j] == '\n')
+		return (0);
+	k = 0;
+	while (content[j + k] && content[j + k] != '\n')
+		k++;
+	if (ft_strncmp(lines[i], content + j, k - 1) != 0
+		|| lines[i][k] != '\0')
+		return (0);
+	return (1);
+}
+
+int	check_empty_lines_in_map(char **lines, int start, t_data *data)
+{
+	char	*content;
+	int		i;
+	int		j;
+	int		k;
+
+	content = data->content;
+	j = skip_to_map_start(content, start);
+	i = start;
 	while (lines[i])
 	{
-		if (content[j] == '\n')
+		if (!validate_map_line(lines, content, i, j))
 			return (0);
 		k = 0;
 		while (content[j + k] && content[j + k] != '\n')
 			k++;
-		if (ft_strncmp(lines[i], content + j, k - 1) != 0 || lines[i][k] != '\0')
-			return (0);
 		j += k;
 		if (content[j] == '\n')
 			j++;

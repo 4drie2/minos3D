@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/18 17:13:11 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/18 19:14:24 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,8 @@ void	draw_vertical_line(t_data *data, t_ray *ray, int x);
 
 /* Parsing */
 int		parse_file(t_data *data, char *filename);
+int		check_extension(char *filename);
+char	*read_file(char *filename);
 int		is_map_start(char *line);
 int		parse_line(char *line, t_config *config);
 int		ft_array_len(char **array);

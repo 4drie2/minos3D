@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:00:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/17 18:37:01 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/18 19:14:24 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	all_elements_set(t_config *config)
 	return (1);
 }
 
-static int	process_lines(char **split_content, t_data *data)
+static int	process_config(char **split_content, t_data *data, int *map_start)
 {
 	int		i;
 	char	*trimmed;
@@ -43,6 +43,12 @@ static int	process_lines(char **split_content, t_data *data)
 		}
 		free(trimmed);
 	}
+	*map_start = i;
+	return (1);
+}
+
+static int	validate_and_parse_map(char **split_content, int i, t_data *data)
+{
 	if (!all_elements_set(&data->config))
 		return (write(2, "Missing config elem\n", 20), 0);
 	if (!check_empty_lines_in_map(split_content, i, data))
@@ -52,40 +58,11 @@ static int	process_lines(char **split_content, t_data *data)
 	return (1);
 }
 
-static int	check_extension(char *filename)
-{
-	char	*dot;
-
-	dot = ft_strrchr(filename, '.');
-	if (!dot || ft_strcmp(dot, ".cub") != 0)
-		return (0);
-	return (1);
-}
-
-static char	*read_file(char *filename)
-{
-	int		fd;
-	char	*line;
-	char	*content;
-
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	content = ft_strdup("");
-	line = get_next_line(fd);
-	while (line)
-	{
-		content = ft_strjoin_free(content, line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (content);
-}
-
 int	parse_file(t_data *data, char *filename)
 {
 	char	*content;
 	char	**split_content;
+	int		map_start;
 
 	content = NULL;
 	split_content = NULL;
@@ -94,15 +71,14 @@ int	parse_file(t_data *data, char *filename)
 	content = read_file(filename);
 	if (content == NULL)
 		return (write(2, "error, bad read\n", 16), 0);
-	// if (!check_empty_lines_in_map(content))
-		// return (free(content), 0);
 	data->content = content;
 	split_content = ft_split(content, '\n');
 	if (!split_content)
 		return (write(2, "bad split\n", 10), 0);
 	data->split_content = split_content;
-	// free(content);
-	if (!(process_lines(split_content, data)))
+	if (!(process_config(split_content, data, &map_start)))
+		return (ft_free_array(split_content), 0);
+	if (!(validate_and_parse_map(split_content, map_start, data)))
 		return (ft_free_array(split_content), 0);
 	ft_free_array(split_content);
 	return (1);

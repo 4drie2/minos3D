@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 20:44:07 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/18 17:11:47 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/18 19:14:24 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	mouse_move(int x, int y, t_data *data)
 	(void)y;
 	if (MOUSE_SENSITIVITY <= 0)
 		return (0);
-
 	center_x = WIN_WIDTH / 2;
 	if (data->mouse.first_move)
 	{
@@ -37,7 +36,6 @@ int	mouse_move(int x, int y, t_data *data)
 		return (0);
 	rotate_player(&data->player, delta_x * MOUSE_SENSITIVITY);
 	mlx_mouse_move(data->mlx, data->win, center_x, WIN_HEIGHT / 2);
-
 	return (0);
 }
 
