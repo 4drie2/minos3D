@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 12:56:13 by plerick           #+#    #+#             */
-/*   Updated: 2025/11/17 18:38:47 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/18 16:42:41 by adrien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	space_in_map(char *content, int i)
 {
 	int	j;
-	
+
 	while (content[i] != '\0')
 	{
 		if (content[i] == '\n' && content[i + 1] == '\n')
@@ -86,6 +86,8 @@ int	check_empty_lines_in_map(char **lines, int start, t_data *data)
 			j++;
 		i++;
 	}
+	while (content[j] == '\n')
+		j++;
 	while (lines[i])
 	{
 		if (content[j] == '\n')
