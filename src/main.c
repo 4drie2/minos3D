@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 16:17:40 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/18 17:25:52 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/19 16:09:57 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ int	main(int argc, char *argv[])
 	mlx_hook(data.win, KeyRelease, KeyReleaseMask, key_release, &data);
 	mlx_hook(data.win, MotionNotify, PointerMotionMask, mouse_move, &data);
 	mlx_loop_hook(data.mlx, render_frame, &data);
-	mlx_mouse_hide(data.mlx, data.win);
-	mlx_mouse_move(data.mlx, data.win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	mlx_loop(data.mlx);
 	return (0);
 }
