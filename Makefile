@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adrien <adrien@student.42.fr>              +#+  +:+       +#+         #
+#    By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/28 16:14:19 by abidaux           #+#    #+#              #
-#    Updated: 2025/11/12 09:42:28 by adrien           ###   ########.fr        #
+#    Updated: 2025/11/19 15:37:05 by abidaux          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,26 @@ LIBFT		= $(LIBFT_DIR)/libft.a
 MLX			= $(MLX_DIR)/libmlx.a
 
 # --- Fichiers ---
-SRCS		= $(wildcard $(SRC_DIR)/*.c)
+SRCS		= $(SRC_DIR)/cleanup.c \
+			  $(SRC_DIR)/event.c \
+			  $(SRC_DIR)/init.c \
+			  $(SRC_DIR)/main.c \
+			  $(SRC_DIR)/parse_config.c \
+			  $(SRC_DIR)/parse_file_utils.c \
+			  $(SRC_DIR)/parse_map_utils.c \
+			  $(SRC_DIR)/parse_map.c \
+			  $(SRC_DIR)/parse_player_dir.c \
+			  $(SRC_DIR)/parse_player.c \
+			  $(SRC_DIR)/parse_validation.c \
+			  $(SRC_DIR)/parsing.c \
+			  $(SRC_DIR)/player_move.c \
+			  $(SRC_DIR)/player_rotation.c \
+			  $(SRC_DIR)/player.c \
+			  $(SRC_DIR)/raycasting_draw.c \
+			  $(SRC_DIR)/raycasting_utils.c \
+			  $(SRC_DIR)/raycasting.c \
+			  $(SRC_DIR)/texture.c
+
 OBJS		= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # --- Couleurs ---
@@ -50,10 +69,6 @@ $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	$(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
 	@echo "$(GREEN)✓ $(NAME) créé avec succès !$(RESET)"
 
-# --- AJOUT DE LA CORRECTION ICI ---
-# Cette règle force make à attendre que $(LIBFT) et $(MLX) soient prêts
-# avant de compiler les fichiers objets, même en parallèle (-j).
-# Le '|' est un "prérequis d'ordre seul".
 $(OBJS): | $(LIBFT) $(MLX)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
