@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_draw.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:02:30 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/18 17:10:43 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/19 16:56:41 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 /*
-** draw_ceiling : dessine le ciel
+** draw_ceiling: draws the ceiling
 */
 static void	draw_ceiling(t_data *data, t_ray *ray, int x)
 {
@@ -31,7 +31,7 @@ static void	draw_ceiling(t_data *data, t_ray *ray, int x)
 }
 
 /*
-** draw_wall : dessine le mur avec texture
+** draw_wall: draws the wall with texture
 */
 static void	draw_wall(t_data *data, t_ray *ray, int x)
 {
@@ -59,7 +59,7 @@ static void	draw_wall(t_data *data, t_ray *ray, int x)
 }
 
 /*
-** draw_floor : dessine le sol
+** draw_floor: draws the floor
 */
 static void	draw_floor(t_data *data, t_ray *ray, int x)
 {
@@ -77,11 +77,11 @@ static void	draw_floor(t_data *data, t_ray *ray, int x)
 }
 
 /*
-** draw_vertical_line : dessine une colonne de l'écran avec textures
+** draw_vertical_line: draws a screen column with textures
 **
-** Ciel (0 à draw_start) -> bleu clair
-** Mur (draw_start à draw_end) -> texture
-** Sol (draw_end à WIN_HEIGHT) -> gris foncé
+** Ceiling (0 to draw_start) -> light blue
+** Wall (draw_start to draw_end) -> texture
+** Floor (draw_end to WIN_HEIGHT) -> dark gray
 */
 void	draw_vertical_line(t_data *data, t_ray *ray, int x)
 {

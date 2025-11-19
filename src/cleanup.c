@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:04:24 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/18 17:35:46 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/19 16:56:41 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_config_struc(t_config *config)
 }
 
 /*
-** cleanup_map : libère la map
+** cleanup_map: frees the map
 */
 static void	cleanup_map(t_data *data)
 {
@@ -44,7 +44,7 @@ static void	cleanup_map(t_data *data)
 }
 
 /*
-** cleanup : libère toutes les ressources MLX
+** cleanup: frees all MLX resources
 */
 void	cleanup(t_data *data)
 {

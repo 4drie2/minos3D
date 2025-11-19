@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 16:17:40 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/19 16:09:57 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/19 16:56:41 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	init_parsing(t_data *data)
 }
 
 /*
-** close_window : appelé quand on ferme la fenêtre (croix rouge)
+** close_window: called when the window is closed (red cross)
 */
 int	close_window(t_data *data)
 {
@@ -40,7 +40,7 @@ int	main(int argc, char *argv[])
 	t_data	data;
 
 	if (argc != 2)
-		return (write(2, "Not enough args\n", 16));
+		return (write(2, "Must get only map arg\n", 22));
 	init_parsing(&data);
 	if (!parse_file(&data, argv[1]))
 		ft_error("parsing failed", &data);

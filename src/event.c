@@ -6,15 +6,15 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 20:44:07 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/18 19:14:24 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/19 16:56:41 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 /*
-** mouse_move : gère le mouvement de la souris pour rotation
-** Calcule le delta entre la position actuelle et la dernière position
+** mouse_move: handles mouse movement for rotation
+** Calculates the delta between the current position and the last position
 */
 int	mouse_move(int x, int y, t_data *data)
 {
@@ -40,7 +40,7 @@ int	mouse_move(int x, int y, t_data *data)
 }
 
 /*
-** key_press : enregistre les touches pressées
+** key_press: registers the pressed keys
 */
 int	key_press(int keycode, t_data *data)
 {
@@ -64,7 +64,7 @@ int	key_press(int keycode, t_data *data)
 }
 
 /*
-** key_release : enregistre les touches relâchées
+** key_release: registers the released keys
 */
 int	key_release(int keycode, t_data *data)
 {
@@ -86,7 +86,7 @@ int	key_release(int keycode, t_data *data)
 }
 
 /*
-** update_movement : gère les mouvements en fonction des touches pressées
+** update_movement: handles movements based on pressed keys
 */
 void	update_movement(t_data *data)
 {

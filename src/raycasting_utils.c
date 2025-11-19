@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrien <adrien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:03:43 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/12 20:06:28 by adrien           ###   ########.fr       */
+/*   Updated: 2025/11/19 16:56:41 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 /*
-** calculate_wall_height : calcule la distance au mur et sa hauteur à l'écran
+** calculate_wall_height: calculates the distance to the wall and its screen height
 **
-** 1. Calcule la distance PERPENDICULAIRE au mur (pas euclidienne)
-**    pour éviter l'effet "fisheye" (distorsion)
-** 2. Calcule la hauteur du mur à l'écran (plus proche = plus grand)
-** 3. Détermine les limites verticales de dessin (draw_start/draw_end)
+** 1. Calculates the PERPENDICULAR distance to the wall (not euclidean)
+**    to avoid the "fisheye" effect (distortion)
+** 2. Calculates the wall height on screen (closer = larger)
+** 3. Determines the vertical drawing limits (draw_start/draw_end)
 */
 void	calculate_wall_height(t_data *data, t_ray *ray)
 {
@@ -42,11 +42,11 @@ void	calculate_wall_height(t_data *data, t_ray *ray)
 }
 
 /*
-** calculate_texture_x : calcule la coordonnée x de la texture
+** calculate_texture_x: calculates the x coordinate of the texture
 **
-** wall_x : position exacte où le rayon touche le mur (0.0 à 1.0)
-** tex_x : coordonnée x dans la texture
-** tex_num : quelle texture utiliser (0=NO, 1=SO, 2=EA, 3=WE)
+** wall_x: exact position where the ray hits the wall (0.0 to 1.0)
+** tex_x: x coordinate in the texture
+** tex_num: which texture to use (0=NO, 1=SO, 2=EA, 3=WE)
 */
 void	calculate_texture_x(t_data *data, t_ray *ray)
 {

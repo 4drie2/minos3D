@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plerick <plerick@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 15:10:45 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/13 17:14:58 by plerick          ###   ########.fr       */
+/*   Updated: 2025/11/19 16:56:41 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 /*
-** load_texture : charge une texture XPM depuis un fichier
-** Utilise mlx_xpm_file_to_image pour charger l'image
-** Récupère l'adresse mémoire pour accéder aux pixels
+** load_texture: loads an XPM texture from a file
+** Uses mlx_xpm_file_to_image to load the image
+** Retrieves the memory address to access the pixels
 */
 int	load_texture(t_data *data, t_texture *texture, char *path)
 {
@@ -68,7 +68,7 @@ int	init_textures(t_data *data)
 }
 
 /*
-** free_textures : libère toutes les textures chargées
+** free_textures: frees all loaded textures
 */
 void	free_textures(t_data *data)
 {
@@ -89,8 +89,8 @@ void	free_textures(t_data *data)
 }
 
 /*
-** get_texture_color : récupère la couleur d'un pixel dans une texture
-** x, y : coordonnées du pixel dans la texture
+** get_texture_color: retrieves the color of a pixel in a texture
+** x, y: coordinates of the pixel in the texture
 */
 int	get_texture_color(t_texture *texture, int x, int y)
 {

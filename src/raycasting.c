@@ -6,21 +6,21 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:03:15 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/19 16:10:48 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/19 16:56:41 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 /*
-** perform_dda : algorithme DDA (Digital Differential Analysis)
-** Parcourt la map case par case jusqu'à toucher un mur
+** perform_dda: DDA algorithm (Digital Differential Analysis)
+** Traverses the map cell by cell until hitting a wall
 **
-** Principe :
-** - On avance case par case dans la direction du rayon
-** - step_x/y : direction de déplacement (+1 ou -1)
-** - side_dist : distance au prochain bord de case
-** - delta_dist : distance entre 2 bords de case
+** Principle:
+** - We advance cell by cell in the direction of the ray
+** - step_x/y: direction of movement (+1 or -1)
+** - side_dist: distance to the next cell edge
+** - delta_dist: distance between 2 cell edges
 */
 void	perform_dda(t_data *data, t_ray *ray)
 {
@@ -44,11 +44,11 @@ void	perform_dda(t_data *data, t_ray *ray)
 }
 
 /*
-** init_ray : initialise les données du rayon pour une colonne x
+** init_ray: initializes the ray data for a column x
 **
-** camera_x : position x sur le plan de la caméra (-1 à +1)
-** ray_dir : direction du rayon (dir + plane * camera_x)
-** delta_dist : distance entre 2 intersections de grille
+** camera_x: x position on the camera plane (-1 to +1)
+** ray_dir: direction of the ray (dir + plane * camera_x)
+** delta_dist: distance between 2 grid intersections
 */
 void	init_ray(t_data *data, t_ray *ray, int x)
 {
@@ -64,10 +64,10 @@ void	init_ray(t_data *data, t_ray *ray, int x)
 }
 
 /*
-** init_step : calcule la direction et distance initiale
+** init_step: calculates the direction and initial distance
 **
-** step : +1 ou -1 (direction de déplacement dans la grille)
-** side_dist : distance jusqu'au premier bord de case
+** step: +1 or -1 (direction of movement in the grid)
+** side_dist: distance to the first cell edge
 */
 void	init_step(t_data *data, t_ray *ray)
 {
@@ -98,8 +98,8 @@ void	init_step(t_data *data, t_ray *ray)
 }
 
 /*
-** cast_rays : fonction principale du raycasting
-** Lance un rayon pour chaque colonne de l'écran
+** cast_rays: main raycasting function
+** Casts a ray for each column of the screen
 */
 void	cast_rays(t_data *data)
 {
@@ -119,10 +119,10 @@ void	cast_rays(t_data *data)
 }
 
 /*
-** render_frame : appelée à chaque frame
-** Lance le raycasting et affiche l'image
+** render_frame: called at each frame
+** Launches the raycasting and displays the image
 **
-** Optimisation : on réutilise la même image au lieu de la recréer
+** Optimization: we reuse the same image instead of recreating it
 */
 int	render_frame(t_data *data)
 {

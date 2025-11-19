@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abidaux <abidaux@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:04:49 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/14 01:15:46 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/19 16:56:41 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 /*
-** my_mlx_pixel_put : écrit un pixel dans l'image
-** On utilise l'adresse mémoire de l'image pour écrire directement
-** Plus rapide que mlx_pixel_put qui rafraîchit à chaque appel
+** my_mlx_pixel_put: writes a pixel to the image
+** We use the image's memory address to write directly
+** Faster than mlx_pixel_put which refreshes at each call
 */
 void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
 {
@@ -28,10 +28,10 @@ void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
 }
 
 /*
-** init_player : initialise la position et direction du joueur
-** pos : position (x, y) dans la carte
-** dir : vecteur direction (où regarde le joueur)
-** plane : plan de la caméra (perpendiculaire à dir, définit le FOV)
+** init_player: initializes the player's position and direction
+** pos: position (x, y) on the map
+** dir: direction vector (where the player is looking)
+** plane: camera plane (perpendicular to dir, defines the FOV)
 */
 void	init_player(t_player *player)
 {
@@ -62,11 +62,11 @@ void	init_config(t_config *config)
 }
 
 /*
-** init_data : initialise MLX et crée la fenêtre + image
-** 1. Connexion au serveur graphique (mlx_init)
-** 2. Création de la fenêtre
-** 3. Création de l'image où on va dessiner
-** 4. Récupération de l'adresse mémoire de l'image
+** init_data: initializes MLX and creates the window + image
+** 1. Connection to the graphics server (mlx_init)
+** 2. Creation of the window
+** 3. Creation of the image where we will draw
+** 4. Retrieval of the image's memory address
 */
 int	init_data(t_data *data)
 {
@@ -89,7 +89,7 @@ int	init_data(t_data *data)
 }
 
 /*
-** ft_error : affiche un message d'erreur et quitte
+** ft_error: displays an error message and exits
 */
 void	ft_error(char *msg, t_data *data)
 {

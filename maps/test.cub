@@ -1,7 +1,7 @@
 NO ./textures-fullrobin/east.xpm
-SO ./textures-stylemineraft/south.xpm
-WE ./textures-stylemineraft/west.xpm
-EA ./textures-stylemineraft/east.xpm
+SO ./textures-fullrobin/south.xpm
+WE ./textures-fullrobin/west.xpm
+EA ./textures-fullrobin/east.xpm
 
 
 F 220,100,0
@@ -15,7 +15,6 @@ C 225,30,100
 111111111011000001110000000000001
 100000000011000001110111111111111
 111101111111110111000000100011111
-
 111101111111110111010100100000001
 11000000110101011100000010001111111
 1000000000000000110000001S001    01
