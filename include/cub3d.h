@@ -6,7 +6,7 @@
 /*   By: abidaux <abidaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:28:51 by abidaux           #+#    #+#             */
-/*   Updated: 2025/11/18 19:14:24 by abidaux          ###   ########.fr       */
+/*   Updated: 2025/11/19 12:40:57 by abidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 #define WIN_WIDTH 1400
 #define WIN_HEIGHT 800
-#define MOVE_SPEED 0.03
+#define MOVE_SPEED 0.06
 #define ROT_SPEED 0.005
 #define MOUSE_SENSITIVITY 0.002
 // #define MOUSE_SENSITIVITY 0.0
