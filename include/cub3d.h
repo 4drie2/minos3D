@@ -27,8 +27,8 @@
 #define WIN_HEIGHT 800
 #define MOVE_SPEED 0.06
 #define ROT_SPEED 0.005
-// #define MOUSE_SENSITIVITY 0.002
-#define MOUSE_SENSITIVITY 0.0
+#define MOUSE_SENSITIVITY 0.002
+//#define MOUSE_SENSITIVITY 0.0
 
 typedef struct s_image
 {
